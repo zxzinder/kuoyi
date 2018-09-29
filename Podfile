@@ -1,0 +1,18 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+target ‘kuoyi’ do
+    pod 'AFNetworking'
+    pod 'MBProgressHUD'
+    pod 'BlocksKit'
+    pod 'Masonry'
+    pod 'SDWebImage'
+    pod 'SDCycleScrollView'
+    pod 'Aspects', '~> 1.4.1'
+    pod 'UMengUShare'
+#    pod 'IQKeyboardManager', '~> 4.0.8'
+    pod 'YYModel'
+    pod 'MGSwipeTableCell'
+    pod 'BarrageRenderer'
+    pod 'IQKeyboardManager'
+    pod 'PGDatePicker'
+end
