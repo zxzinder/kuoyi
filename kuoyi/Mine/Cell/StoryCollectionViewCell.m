@@ -170,7 +170,10 @@
 //    }];
 }
 -(void)configureData:(NSDictionary *)data{
-    [self.storyImgView sd_setImageWithURL:[NSURL URLWithString:data[@"imgurl"]] placeholderImage:[UIImage imageWithColor:[UIColor whiteColor]]];
+    if (data[@"imgurl"] && ![data[@"imgurl"] isKindOfClass:[NSNull class]]) {
+          [self.storyImgView sd_setImageWithURL:[NSURL URLWithString:data[@"imgurl"]] placeholderImage:[UIImage imageWithColor:[UIColor whiteColor]]];
+    }
+  
     self.nameLabel.text = data[@"title"];//@"内心有温柔与坚守";
     self.descLabel.text = data[@"author"];;//@"文|康康达"
     if ([data[@"ftitle"] isKindOfClass:[NSNull class]]) {

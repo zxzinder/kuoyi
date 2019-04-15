@@ -176,7 +176,7 @@ static NSString * CELLID = @"mesgCell";
     [KYNetService postDataWithUrl:url param:params success:^(NSDictionary *dict) {
         [HLYHUD hideAllHUDsForView:nil];
         NSLog(@"%@",dict);
-        NSArray *reslutArray = dict[@"data"][@"data"];
+        NSArray *reslutArray = dict[@"data"];
         if (reslutArray.count > 0) {
             for (int i = 0; i < reslutArray.count; i++) {
                 MessageModel *model = [[MessageModel alloc] init];

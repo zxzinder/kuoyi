@@ -16,6 +16,6 @@
 @property (nonatomic, copy) void (^rewardCallback)(NSString *uuid);
 @property (nonatomic, copy) void (^getWebDataCallback)(NSDictionary *webDic,BOOL isShare);
 
--(void)configureCollection:(NSInteger)is_collection;
+-(void)configureCollectionImageSelect:(NSInteger)type;
 
 @end

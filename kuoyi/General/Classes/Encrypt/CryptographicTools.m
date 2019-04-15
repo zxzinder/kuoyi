@@ -7,9 +7,10 @@
 //
 
 #import "CryptographicTools.h"
-#import "GTMDefines.h"
-#import "GTMBase64.h"
-//#import "ConverUtil.h"
+#import "GTMBase64/GTMDefines.h"
+#import "GTMBase64/GTMBase64.h"
+#import "NSData+AES128.h"
+
 
 static CryptographicTools *_sharedInstance = nil;
 
@@ -24,12 +25,19 @@ static CryptographicTools *_sharedInstance = nil;
     return _sharedInstance;
 }
 
-- (NSString *) base64StringFrom:(NSString*) input{
+- (NSString *)base64StringFrom:(NSString*) input{
     NSData *data = [GTMBase64 encodeData:[input dataUsingEncoding:NSUTF8StringEncoding]];
     NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return result;
 }
 
+-(NSString *)base64DecryptStringFrom:(NSString *)input{
+    
+    NSData *data = [GTMBase64 decodeData:[input dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return result;
+    
+}
 
 - (NSString *) md5StringFrom:(NSString*) input{
     if (nil == input) {
@@ -128,8 +136,6 @@ static CryptographicTools *_sharedInstance = nil;
                                                                       length:(NSUInteger)movedBytes] encoding:NSUTF8StringEncoding];
     return result;
 }
-
-
 
 
 

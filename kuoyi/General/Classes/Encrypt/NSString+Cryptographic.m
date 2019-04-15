@@ -23,4 +23,27 @@
     return [[CryptographicTools sharedInstance] desDecryptWithText:self key:key];
 }
 
+- (NSString *) aes128EncryptString{
+    return [[CryptographicTools sharedInstance] AES128EncryptStrig:self];
+}
+
+- (NSString *) aes128DecryptString{
+    return [[CryptographicTools sharedInstance] AES128DecryptString:self];
+}
+- (NSString *)hmacSHA256String{
+    
+    return [[CryptographicTools sharedInstance] hmacSHA256WithContent:self];
+    
+}
+- (NSString *)base64EncryptString{
+    
+     return [[CryptographicTools sharedInstance] base64StringFrom:self];
+    
+}
+
+- (NSString *)base64DecryptString{
+    
+    return [[CryptographicTools sharedInstance] base64DecryptStringFrom:self];
+    
+}
 @end

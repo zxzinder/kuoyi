@@ -261,8 +261,8 @@
 //        "order_id" = 29;
 //        "user_uid" = 0;
 //    }
-    self.nameLabel.text = model.peopleData[@"info"][@"people_name"];
-    self.briefLabel.text = model.peopleData[@"info"][@"labels"];
+    self.nameLabel.text = model.peopleData[@"info"][@"people_name"] ? model.peopleData[@"info"][@"people_name"]:@"";
+    self.briefLabel.text = model.peopleData[@"info"][@"labels"] ? model.peopleData[@"info"][@"labels"]:@"";
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:model.peopleData[@"info"][@"headimg"]] placeholderImage:[UIImage imageWithColor:[UIColor whiteColor]]];
     NSInteger titleCount = self.titleArray.count;
     CGFloat lblW = DEVICE_WIDTH * 0.65/ titleCount;

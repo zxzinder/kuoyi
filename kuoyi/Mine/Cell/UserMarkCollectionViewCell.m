@@ -37,7 +37,8 @@
     
     __weak __typeof(self)weakSelf = self;
     
-    self.leftLabel = [self createLabelWithColor:@"3c3c3c" font:17];
+    self.leftLabel = [self createLabelWithColor:@"000000" font:25];
+    self.leftLabel.font = [UIFont fontWithName:@"STZhongsong" size:25];
     [self.contentView addSubview:self.leftLabel];
    
     
@@ -51,8 +52,9 @@
     [self.selectBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
     [self.contentView addSubview:self.selectBtn];
     [self.selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-15);
+        make.left.equalTo(self.contentView.mas_right).offset(-55);
         make.centerY.equalTo(self.contentView.mas_centerY);
+        //make.left.equalTo(self.contentView.mas_left).offset(200);
         //make.size.mas_equalTo(CGSizeMake(0, 0));
     }];
     [self.selectBtn bk_addEventHandler:^(id sender) {
@@ -67,7 +69,7 @@
 -(void)configureData:(NSDictionary *)data{
     
     NSString *markStr = data[@"title"];
-    CGFloat lblWidth = [NSString caculateWidth:markStr font:17 size:CGSizeMake(200, 20)];
+    CGFloat lblWidth = [NSString caculateWidth:markStr font:25 size:CGSizeMake(260, 20)];
     self.leftLabel.text = markStr;
     
     if (data[@"is_select"] && [data[@"is_select"] integerValue] == 1) {
@@ -80,14 +82,15 @@
         make.centerY.equalTo(self.contentView.mas_centerY);
         make.left.equalTo(self.contentView.mas_left).offset(20);
         make.right.equalTo(self.contentView.mas_left).offset(20 + lblWidth + 2);
-        make.size.height.mas_equalTo(20);
+        make.size.height.mas_equalTo(25);
     }];//
     [self.segView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.leftLabel.mas_centerY);
         make.left.equalTo(self.leftLabel.mas_left);
         make.right.equalTo(self.leftLabel.mas_right);
-        make.size.height.mas_equalTo(3);
+        make.size.height.mas_equalTo(8);
     }];
+    [self.contentView bringSubviewToFront:self.leftLabel];
 }
 
 #pragma mark setter

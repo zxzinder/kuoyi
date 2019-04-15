@@ -48,7 +48,7 @@
 @property (nonatomic, strong) UILabel *priceLabel;
 
 @property (nonatomic, assign) NSInteger currentCount;
-@property (nonatomic, strong) TimePickView *timepickView;
+
 
 @end
 
@@ -176,7 +176,7 @@
         make.size.height.mas_equalTo(23);
     }];
     [self.dateBtn bk_addEventHandler:^(id sender) {
-       [[NSNotificationCenter defaultCenter] postNotificationName:kCalendarPick object:nil];
+       [[NSNotificationCenter defaultCenter] postNotificationName:kCalendarPick object:@{@"facilities":weakSelf.spaceData[@"facilities"]}];
     } forControlEvents:UIControlEventTouchUpInside];
     
     self.beginTimeBtn = [self createBtnWithColor:@"000000" font:12];
@@ -366,6 +366,10 @@
     
     NSString *beginDate = [NSString stringWithFormat:@"%@ %@:00",self.dateBtn.titleLabel.text,self.beginTimeBtn.titleLabel.text];//@"2012-12-12 12:20:12"
      NSString *endDate = [NSString stringWithFormat:@"%@ %@:00",self.dateBtn.titleLabel.text,self.endTimeBtn.titleLabel.text];
+    if (![self compareOneDay:beginDate withAnotherDay:endDate]) {
+        [HLYHUD showHUDWithMessage:@"开始时间比结束时间晚！" addToView:nil];
+        return;
+    }
     NSDictionary *params = @{@"id":self.spaceData[@"uuid"],@"number":@(self.currentCount),@"class":@(OrderSpace),
                              @"bgdate":beginDate,@"enddate":endDate,@"tp":self.spaceData[@"types"]
                              };
@@ -401,6 +405,30 @@
         NSString *selectTime =  userinfo.object[@"endTime"];
         [self.endTimeBtn setTitle:selectTime forState:UIControlStateNormal];
     }
+    
+}
+
+-(BOOL)compareOneDay:(NSString *)oneDay withAnotherDay:(NSString *)anotherDay{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate *dateA = [dateFormatter dateFromString:oneDay];
+    
+    NSDate *dateB = [dateFormatter dateFromString:anotherDay];
+    
+    NSComparisonResult result = [dateA compare:dateB];
+    
+    if (result == NSOrderedDescending) {
+        //NSLog(@"oneDay比 anotherDay时间晚");
+        return NO;
+    }else if (result == NSOrderedAscending){
+        //NSLog(@"oneDay比 anotherDay时间早");
+        return YES;
+    }
+    //NSLog(@"两者时间是同一个时间");
+    return NO;
     
 }
 

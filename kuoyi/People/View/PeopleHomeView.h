@@ -24,7 +24,7 @@
 -(void)hideDetailImgView;
 -(void)configureBackViewColor:(BOOL)isWhite;
 
--(void)updateCollectCount;
+-(void)updateCollectCount:(NSInteger)type;
 -(void)updateFabulousCount;
 
 @end

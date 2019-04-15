@@ -10,6 +10,7 @@
 
 @interface CalendarPickViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *cantSelectDateArray;
 @property (nonatomic, copy) void (^selectCallback)(NSString *date);
 
 @end

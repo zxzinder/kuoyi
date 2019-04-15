@@ -667,14 +667,16 @@
         [HLYHUD hideHUDForView:nil];
         NSLog(@"%@",dict);
         
-        if (dict[@"is_existence"] && [dict[@"is_existence"] integerValue] == 1) {
-            [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
-            [[CustomerManager sharedInstance] updateCustomerWithDictionary:dict[@"data"]];
-        }else{
-            [[CustomerManager sharedInstance] updateCustomerWithDictionary:loginData];
-        }
+//        if (dict[@"is_existence"] && [dict[@"is_existence"] integerValue] == 1) {
+            //[HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
+            [[CustomerManager sharedInstance] updateCustomerWithDictionary:dict];
+//        }else{
+//            [[CustomerManager sharedInstance] updateCustomerWithDictionary:loginData];
+//        }
         [CustomerManager sharedInstance].customer.isLogin = YES;
+        //Customer *model = [CustomerManager sharedInstance].customer;
         [[CustomerManager sharedInstance] saveNewDataWithCustomer:[CustomerManager sharedInstance].customer];
+        //Customer *model2 = [CustomerManager sharedInstance].customer;
         [self dismissViewControllerAnimated:YES completion:^{
             if (weakSelf.loginSuccessBlock) {
                 weakSelf.loginSuccessBlock();
@@ -828,7 +830,7 @@
             
             // 第三方平台SDK源数据
             NSLog(@"QQ originalResponse: %@", resp.originalResponse);
-            [HLYHUD showHUDWithMessage:@"tencentDidLogin Success" addToView:self.view];
+//            [HLYHUD showHUDWithMessage:@"tencentDidLogin Success" addToView:self.view];
             NSMutableDictionary *loginResult = [NSMutableDictionary dictionary];
             [loginResult setValue:resp.openid forKey:@"openid"];
             [loginResult setValue:@(QQLogin) forKey:@"login_class"];

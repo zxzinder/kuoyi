@@ -24,6 +24,7 @@
 #import "NotificationMacro.h"
 #import "ActionSeetPickerView.h"
 #import "ChangePhoneViewController.h"
+#import "UserMarkViewController.h"
 
 
 #define TF_TAG 1000
@@ -55,7 +56,7 @@ static NSString *CELLID = @"userCell";
  //   self.view.backgroundColor = [UIColor redColor];
     self.customer = [CustomerManager sharedInstance].customer;
     self.dataSourceArray = @[@[@"头像"],
-                             @[@"昵称",@"手机号",@"星座",@"性别",@"所在地",@"个人介绍"]
+                             @[@"昵称",@"手机号",@"星座",@"性别",@"所在地",@"标签",@"个人介绍"]
                             // @[@"QQ",@"微信",@"新浪微博"]
                              ];
     self.sexArray = @[@"男",@"女",@"中性"];
@@ -75,7 +76,19 @@ static NSString *CELLID = @"userCell";
     } forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.rightBarButtonItem = rightBarItem;
-    self.selectAddress = [NSString stringWithFormat:@"%@,%@,%@",self.customer.province,self.customer.city,self.customer.district_county];
+    
+    NSMutableString *addMStr = [[NSMutableString alloc] initWithString:@""];
+    if (self.customer.province) {
+        [addMStr appendString:self.customer.province];
+        if (self.customer.city) {
+             [addMStr appendString:[NSString stringWithFormat:@",%@",self.customer.city]];
+            if (self.customer.district_county) {
+                 [addMStr appendString:[NSString stringWithFormat:@",%@",self.customer.district_county]];
+            }
+        }
+    }
+    self.selectAddress = addMStr;
+//    self.selectAddress = [NSString stringWithFormat:@"%@,%@,%@",self.customer.province,self.customer.city,self.customer.district_county];
     [self p_initUI];
  
 }
@@ -177,8 +190,7 @@ static NSString *CELLID = @"userCell";
             [picker setLeftTintColor:[UIColor tp_lightGaryTextColor]];
             [picker setRightTintColor:[UIColor colorWithHexString:@"17a7af"]];
             [picker show];
-        }
-        else if (indexPath.row == 4){
+        }else if (indexPath.row == 4){
             
             LNAddressSelectView *pickerView = [[LNAddressSelectView alloc] init];
             __weak typeof(self) weakSelf = self;
@@ -189,6 +201,9 @@ static NSString *CELLID = @"userCell";
                 [weakSelf.userTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             };
             [self.view addSubview:pickerView];
+        }else if (indexPath.row == 5){
+            UserMarkViewController *vc = [[UserMarkViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
 
     }else{
@@ -260,7 +275,11 @@ static NSString *CELLID = @"userCell";
             textColor = @"b4b4b5";
             contentTF.enabled = NO;
             content = self.selectAddress;
-        }else{//5
+        }else if (indexPath.row == 5){
+            textColor = @"b4b4b5";
+            content = @"";
+            contentTF.enabled = NO;
+        }else if (indexPath.row == 6){//5
             textColor = @"b4b4b5";
             content = self.customer.info;
         }
@@ -278,9 +297,7 @@ static NSString *CELLID = @"userCell";
         // [contentTF setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
 //        [contentTF addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
         contentTF.text = content; //self.infoArray[indexPath.section][@"passengerName"];
-    
         contentTF.textColor = [UIColor colorWithHexString:textColor];
-  
       
     }
 
@@ -296,7 +313,7 @@ static NSString *CELLID = @"userCell";
         make.centerY.equalTo(cell.contentView.mas_centerY);
     }];
     if (indexPath.section == 1) {
-        if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3  || indexPath.row == 4) {
+        if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3  || indexPath.row == 4 || indexPath.row == 5) {
             rightImgView.hidden = NO;
         }
     }

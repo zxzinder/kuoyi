@@ -9,6 +9,8 @@
 #ifndef NotificationMacro_h
 #define NotificationMacro_h
 
+#define kHomePageLoad         @"kHomePageLoad"
+
 #define kCalendarGetTime         @"kCalendarGetTime"
 #define kCalendarGetDate         @"kCalendarGetDate"
 #define kCalendarPick         @"kCalendarPick"

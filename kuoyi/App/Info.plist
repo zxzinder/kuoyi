@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>UIAppFonts</key>
-    <array>
-        <string>mingliu_hkscs.ttf</string>
-        <string>SourceHanSerifCN-Medium-6.otf</string>
-         <string>SourceHanSerifCN-ExtraLight-3.otf</string>
-    </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
@@ -146,6 +140,12 @@
 	<string>易来客运需要获取您的位置信息，以便司机师傅能够准确接您上车</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>以便您上传头像</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>华文中宋.ttf</string>
+		<string>超世纪细明体.ttf</string>
+		<string>MingLiU.ttf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -195,7 +195,7 @@
     if ([resultStatus integerValue] == 9000) {
         CTAlertView *alerView = [[CTAlertView alloc] initWithTitle:@"" Details:@"支付成功!" OkButton:@"确认"];
         alerView.delegate = self;
-        [alerView show:self.view];
+        [alerView show:nil];
     }else{
         [HLYHUD showHUDWithMessage:resultDic[@"memo"] addToView:nil];
     }
@@ -243,6 +243,7 @@
 }
 
 #pragma mark setter
+
 -(UILabel *)createLabelWithColor:(NSString *)color font:(CGFloat)font{
     
     UILabel *lbl = [[UILabel alloc] init];

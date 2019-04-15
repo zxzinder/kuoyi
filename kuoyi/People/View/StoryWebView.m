@@ -102,7 +102,8 @@
     }
     [self addSubview:self.titleScrollView];
     [self.titleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.bottom.equalTo(self.topView);
+        make.top.bottom.equalTo(self.topView);
+        make.right.equalTo(self.topView.mas_right).offset(-10);
         make.size.width.mas_equalTo(titleBtnWidth * titleShowCount);
     }];
     
@@ -159,8 +160,14 @@
         make.top.equalTo(rewardLabel.mas_bottom).offset(17);
     }];
     
+    //is_collect
     
     self.collectImgView = [[UIImageView alloc] init];
+    if (self.idsList.count > 0 && [self.idsList[self.pageIndex][@"is_collect"] integerValue] > 0) {
+        self.collectImgView.image = [UIImage imageNamed:@"pplike_select"];
+    }else{
+        self.collectImgView.image = [UIImage imageNamed:@"pplike"];
+    }
     self.collectImgView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:self.collectImgView];
     self.collectImgView.userInteractionEnabled  = YES;
@@ -209,13 +216,15 @@
     
 }
 
--(void)configureCollection:(NSInteger)is_collection{
+-(void)configureCollectionImageSelect:(NSInteger)type{
     
-//    if (is_collection > 0) {
-//        self.collectImgView.image = [UIImage imageNamed:@"pplike_select"];
-//    }else{
+    if (type == 0) {//取消收藏
         self.collectImgView.image = [UIImage imageNamed:@"pplike"];
-//    }
+    }else{
+        self.collectImgView.image = [UIImage imageNamed:@"pplike_select"];
+    }
+    
+
     
 }
 
@@ -236,7 +245,7 @@
             
             CGFloat btnX = i * btnW;
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom] ;
-            [btn setTitle:[NSString stringWithFormat:@"Day %d",i+1] forState:UIControlStateNormal];
+            [btn setTitle:[NSString stringWithFormat:@"Day %ld",i+1] forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateNormal];
             btn.titleLabel.font = [UIFont systemFontOfSize:12];
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
@@ -307,7 +316,11 @@
     [self setTitleBtn:btn];
     CGFloat a = self.contentWidth;
     CGFloat x = i * a;
-    
+    if ([self.idsList[self.pageIndex][@"is_collect"] integerValue] > 0) {
+        self.collectImgView.image = [UIImage imageNamed:@"pplike_select"];
+    }else{
+        self.collectImgView.image = [UIImage imageNamed:@"pplike"];
+    }
     [self.contentScrollView setContentOffset:CGPointMake(x, 0) animated:YES];
     if (self.idsList.count > 3) {
         // 选中按钮时要让选中的按钮居中
@@ -337,8 +350,7 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
 //    if ([scrollView isEqual:self.contentScrollView]) {
 //        NSInteger pageIndex = 0;
 //        CGFloat x = self.contentScrollView.contentOffset.x;
@@ -353,6 +365,7 @@
 //        [self setTitleBtn:self.buttons[pageIndex]];
 //
 //    }
+   
  
 }
 

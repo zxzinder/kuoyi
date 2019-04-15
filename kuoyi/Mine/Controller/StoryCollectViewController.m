@@ -71,6 +71,7 @@ static NSString *CELLID = @"storyCell";
     __weak __typeof(self)weakSelf = self;
     [HLYHUD showLoadingHudAddToView:nil];
     NSString *url = @"v1.collect/getfavorites";
+ //   Customer *cusModel = [CustomerManager sharedInstance].customer;
     NSDictionary *params = @{@"user_uid":[CustomerManager sharedInstance].customer.uuid,@"fav_type":@(StoryCollection)};
     [KYNetService GetHttpDataWithUrlStr:url Dic:params SuccessBlock:^(NSDictionary *dict) {
         [HLYHUD hideAllHUDsForView:nil];

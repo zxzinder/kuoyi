@@ -71,9 +71,10 @@
     self.cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
     self.cycleScrollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     [self.contentView addSubview:self.cycleScrollView];
+    CGFloat cycleScrollViewHeight = DEVICE_WIDTH * 0.83 * 1.22;
     [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.contentView);
-        make.size.height.mas_equalTo(DEVICE_WIDTH * 0.83 * 1.22);
+        make.size.height.mas_equalTo(cycleScrollViewHeight);
     }];
     
     UIView *pageView = [[UIView alloc] init];//
@@ -105,8 +106,8 @@
 //    cycleScrollView3.imageURLStringsGroup = imagesURLStrings;  CGRectMake(0, 0,w , w*1.25)
     CGFloat w = DEVICE_WIDTH * 0.83;
     CGFloat nameFont = 25;
-    CGFloat nameTop = -1;
-    CGFloat midTop = 4;
+    CGFloat nameTop = 0;
+    CGFloat midTop = 2;
     CGFloat midFont = 15;
     CGFloat backHeight = 45;
     CGFloat comOffset = 12;
@@ -115,21 +116,19 @@
         
         nameFont = 30;
         nameTop = 5;
-        midTop = 8;
+        midTop = 5;
         midFont = 18;
         backHeight = 52;
-         comOffset = 15;
+        comOffset = 15;
         segBot = 37;
     }
     __weak __typeof(self)weakSelf = self;
     self.nameLabel = [self createLabelWithColor:@"3c3c3c" font:nameFont];
-//    self.nameLabel = [[UILabel alloc] init]; Ming-Lt-HKSCS-UNI-H
-//    self.nameLabel.textColor = [UIColor colorWithHexString:@"3c3c3c"];
-//    self.nameLabel.font = [UIFont fontWithName:@"SourceHanSerifCN-ExtraLight" size:nameFont];
+    self.nameLabel.font = [UIFont fontWithName:@"STZhongsong" size:nameFont];
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(20);
-        make.top.equalTo(self.contentView.mas_top).offset(w * 1.25 + nameTop);
+        make.top.equalTo(self.contentView.mas_top).offset(cycleScrollViewHeight + nameTop);
     }];
     
     self.midBackView = [[UIView alloc] init];
@@ -151,7 +150,7 @@
     }];
     
     self.leftLabel = [self createLabelWithColor:@"844915" font:midFont];
-    //self.leftLabel.font = [UIFont fontWithName:@"SourceHanSerifCN-ExtraLight" size:midFont];
+    self.leftLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
     [self.midBackView addSubview:self.leftLabel];
     [self.leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.midBackView.mas_left).offset(20);
@@ -161,14 +160,14 @@
     self.inputTF = [[UITextField alloc] init];
     self.inputTF.textColor = [UIColor colorWithHexString:@"844915"];
     self.inputTF.textAlignment = NSTextAlignmentLeft;
-    self.inputTF.font = [UIFont systemFontOfSize:midFont];
+    self.inputTF.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];//[UIFont systemFontOfSize:midFont];
     self.inputTF.delegate = self;
     self.inputTF.returnKeyType = UIReturnKeyDone;
     [self.midBackView addSubview:self.inputTF];
     [self.inputTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.leftLabel.mas_right).offset(2);
         make.centerY.equalTo(self.leftLabel.mas_centerY);
-        make.size.mas_equalTo(100);
+        make.size.mas_equalTo(CGSizeMake(100, 15));
     }];
     
     self.tfView = [[UIView alloc] init];
@@ -182,7 +181,7 @@
     }];
     
     self.rightLabel = [self createLabelWithColor:@"844915" font:midFont];
-    //self.rightLabel.font = [UIFont fontWithName:@"SourceHanSerifCN-ExtraLight" size:midFont];
+    self.rightLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
     [self.midBackView addSubview:self.rightLabel];
     [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.inputTF.mas_right).offset(2);
@@ -190,7 +189,7 @@
     }];
     
     self.infoLabel = [self createLabelWithColor:@"844915" font:midFont];
-    //self.infoLabel.font = [UIFont fontWithName:@"SourceHanSerifCN-ExtraLight" size:midFont];
+    self.infoLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
     [self.midBackView addSubview:self.infoLabel];
     [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.midBackView.mas_left).offset(20);
@@ -199,6 +198,7 @@
     NSString *str = @"UID犹如带点个性、梦想、复古、人文风味的面貌，呈现着当下80后其中之一的性格。做着自己喜欢的事情，去实现梦想，哪怕过程再艰辛也是种幸福。";
     CGFloat contentHeight = [NSString caculateHeight:str font:12 size:CGSizeMake(DEVICE_WIDTH * 0.83 - 40, MAXFLOAT)];
     self.contentLabel = [self createLabelWithColor:@"3c3c3c" font:12];
+    //self.contentLabel.font = [UIFont fontWithName:@"JetLink-ThinMing" size:12];
     self.contentLabel.numberOfLines = 2;
     [self.contentView addSubview:self.contentLabel];
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -213,8 +213,9 @@
     [self.contentView addSubview:self.btnsView];
     [self.btnsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(20);
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(5);
+        //make.top.equalTo(self.contentLabel.mas_bottom).offset(5);
         make.right.equalTo(self.contentView.mas_right).offset(-20);
+        make.bottom.equalTo(self.botView.mas_top).offset(-segBot-5);
         make.size.height.mas_equalTo(30);
     }];
     
@@ -349,6 +350,7 @@
             [imgMArr addObject:data.img[i][@"url"]];
         }
         self.cycleScrollView.imageURLStringsGroup = imgMArr;
+        [self.cycleScrollView makeScrollViewScrollToIndex:0];
     }else{
         self.cycleScrollView.imageURLStringsGroup = @[@"1.jpg"];
     }
@@ -413,7 +415,7 @@
     
     paraStyle.tailIndent=0;
     
-    NSDictionary *dic =@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@1.0f};
+    NSDictionary *dic =@{NSFontAttributeName:[UIFont fontWithName:@"MingLiU" size:12],NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@1.0f};
     
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:str attributes:dic];
     return attributeStr;

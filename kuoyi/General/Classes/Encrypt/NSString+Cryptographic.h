@@ -15,4 +15,14 @@
 - (NSString *) desEncryptStringWithKey:(NSString *) key;
 
 - (NSString *) desDecryptStringWithKey:(NSString *) key;
+
+- (NSString *) aes128EncryptString;
+
+- (NSString *) aes128DecryptString;
+
+- (NSString *) hmacSHA256String;
+
+- (NSString *) base64EncryptString;
+
+- (NSString *) base64DecryptString;
 @end

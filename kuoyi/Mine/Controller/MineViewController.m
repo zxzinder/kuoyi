@@ -490,8 +490,8 @@ static NSString *CELLID = @"mineCell";
     NSString *url = @"v1.user/getInfo";
     [KYNetService GetHttpDataWithUrlStr:url Dic:@{} SuccessBlock:^(NSDictionary *dict) {
         NSLog(@"%@",dict);
-        if (dict[@"msg_len"]) {
-            NSInteger msgCount = [dict[@"msg_len"] integerValue];
+        if (dict[@"data"][@"msg_len"]) {
+            NSInteger msgCount = [dict[@"data"][@"msg_len"] integerValue];
             if (msgCount > 0) {
                 weakSelf.redView.hidden = NO;
             }else{

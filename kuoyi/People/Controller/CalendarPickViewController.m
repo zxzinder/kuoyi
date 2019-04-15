@@ -33,7 +33,7 @@
     
     self.calendarView.maxTotal = 1;
     
-    [self.calendarView constructionUI];
+    [self.calendarView constructionUI:self.cantSelectDateArray];
 
     self.calendarView.cancelBlock = ^{
         

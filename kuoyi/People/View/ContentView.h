@@ -22,5 +22,5 @@
 @property (nonatomic, copy) void (^getWebDataCallback)(NSDictionary *webDic,BOOL isShare);
 
 -(void)hideMidView;
-
+-(void)configureCollectionImageSelect:(NSInteger)type;
 @end

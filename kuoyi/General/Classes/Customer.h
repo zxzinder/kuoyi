@@ -37,8 +37,12 @@
 @property (nonatomic, assign) NSInteger share;
 @property (nonatomic, copy) NSString *constellation;
 @property (nonatomic, assign) NSInteger danmu_len;
+@property (nonatomic, strong) NSString *lable_ids;
 
 @property (nonatomic, assign) BOOL isLogin;
+
+
+//"lable_ids" = "3,5,8,9";
 //birthday = "<null>";
 //city = "<null>";
 //country = "<null>";

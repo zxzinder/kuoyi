@@ -247,9 +247,9 @@
     //self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f",price];//@"￥25.00";
     self.nameLabel.text = [NSString stringWithFormat:@"%@",data[@"goods_title"]];//@"《够用就好》第一期";
     self.descLabel.text = [NSString stringWithFormat:@"%@",data[@"describe"]];//@"(附赠《可末先生日记》1本)";
-    self.proImgView.image = [UIImage imageWithColor:[UIColor whiteColor] Rect:CGRectMake(0, 0, 80, 80)];
+//    self.proImgView.image = [UIImage imageWithColor:[UIColor whiteColor] Rect:CGRectMake(0, 0, 80, 80)];
 //    if (data[@"goods_img"] && [data[@"goods_img"] isEqualToString:@"<null>"]) {
-//          [self.proImgView sd_setImageWithURL:[NSURL URLWithString:data[@"goods_img"]] placeholderImage:[UIImage imageNamed:@""]];
+          [self.proImgView sd_setImageWithURL:[NSURL URLWithString:data[@"goods_img"]] placeholderImage:[UIImage imageWithColor:[UIColor whiteColor] Rect:CGRectMake(0, 0, 80, 80)]];
 //    }
 
     self.numLabel.text = [NSString stringWithFormat:@"%ld",(long)self.currentCount];

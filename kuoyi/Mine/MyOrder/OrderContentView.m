@@ -168,8 +168,16 @@ static NSString *CELLID = @"orderCell";
 #pragma mark UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return self.dataArray.count;
+    //return self.dataArray.count;
     
+    if (self.dataArray.count == 0 || self.dataArray == nil) {
+        
+        tableView.backgroundView = [self emptyTableViewOfBackgroundView];
+        return 0;
+    } else {
+        tableView.backgroundView = nil;
+        return self.dataArray.count;
+    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.dataArray[section][@"order_list"] count];
@@ -484,5 +492,29 @@ static NSString *CELLID = @"orderCell";
         _productArray = [NSMutableArray array];
     }
     return _productArray;
+}
+- (UIView *)emptyTableViewOfBackgroundView {
+    
+    UIView *backView = [[UIView alloc] initWithFrame:self.contentTableView.frame];
+    //    UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"lion"]];
+    //    [backView addSubview:imageView];
+    
+    UILabel *label = [[UILabel alloc]init];
+    label.text = @"暂无结果~";
+    label.textColor = [UIColor tp_lightGaryTextColor];
+    [backView addSubview:label];
+    
+    //    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.centerX.equalTo(backView.mas_centerX);
+    //        make.centerY.equalTo(backView.mas_centerY);
+    //    }];
+    
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        //        make.centerX.equalTo(backView.mas_centerX);
+        //        make.top.equalTo(imageView.mas_bottom).offset(20);
+        make.center.equalTo(backView);
+    }];
+    
+    return backView;
 }
 @end

@@ -147,7 +147,6 @@
     [self.storyWebView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.midView);
     }];
-    [self.storyWebView configureCollection:self.info.is_collection];
     self.storyWebView.rewardCallback = ^(NSString *uuid) {
         if (weakSelf.rewardCallback) {
             weakSelf.rewardCallback(uuid);
@@ -398,6 +397,10 @@
         self.contentScrollView.alpha = 0;
     }];
     
+}
+-(void)configureCollectionImageSelect:(NSInteger)type{
+    
+    [self.storyWebView configureCollectionImageSelect:type];
 }
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

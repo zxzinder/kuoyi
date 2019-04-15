@@ -177,7 +177,14 @@
     }else if ([self.codeTF.text isEqualToString:@""]){
         [HLYHUD showHUDWithMessage:@"请先填写验证码" addToView:nil];
     }else{
-        [weakSelf changePhoneRequest];
+        [self checkCodeRequestSuccess:^{
+            if (weakSelf.finishCallback) {
+                weakSelf.finishCallback(self.phoneTF.text);
+            }
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        } fail:^{
+            
+        }];
     }
     
 }
@@ -223,7 +230,33 @@
         [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
     }];
 }
-
+-(void)checkCodeRequestSuccess:(void(^)(void))success fail:(void(^)(void))fail{
+    
+    NSString *url = @"v1.user/checMsgCode";
+    NSDictionary *params = @{@"phone":self.phoneTF.text,@"type":@(ChangePhoneCode),@"code":self.codeTF.text};
+    [HLYHUD showLoadingHudAddToView:nil];
+    [KYNetService GetHttpDataWithUrlStr:url Dic:params SuccessBlock:^(NSDictionary *dict) {
+        [HLYHUD hideAllHUDsForView:nil];
+        NSLog(@"%@",dict);
+        if ([dict[@"error"] integerValue] == 0) {
+            if (success) {
+                success();
+            }
+        }else{
+            if (fail) {
+                fail();
+            }
+        }
+        
+    } FailureBlock:^(NSDictionary *dict) {
+        [HLYHUD hideAllHUDsForView:nil];
+        [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
+        if (fail) {
+            fail();
+        }
+    }];
+    
+}
 -(void)changePhoneRequest{
     
 //    __weak typeof(self)weakSelf = self;
@@ -239,10 +272,7 @@
 //        [HLYHUD hideAllHUDsForView:nil];
 //        [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
 //    }];
-    if (self.finishCallback) {
-        self.finishCallback(self.phoneTF.text);
-    }
-    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 #pragma mark -- <UITextFieldDelegate>

@@ -105,7 +105,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kuoyi/People/Controller/RewardViewController.m"
-            timestampString = "557822661.485657"
+            timestampString = "561133084.652451"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "358"
@@ -121,7 +121,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kuoyi/People/Controller/RewardViewController.m"
-            timestampString = "557822661.485703"
+            timestampString = "561133084.652542"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "345"
@@ -137,7 +137,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kuoyi/People/Controller/RewardViewController.m"
-            timestampString = "557822661.485745"
+            timestampString = "561133084.652603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "255"
@@ -153,7 +153,7 @@
                   moduleName = "kuoyi"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zinder/Documents/mycode/kuoyi/kuoyi/kuoyi/People/Controller/RewardViewController.m"
-                  timestampString = "559896245.944255"
+                  timestampString = "576684584.699852"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "255"
@@ -168,7 +168,7 @@
                   moduleName = "kuoyi"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zinder/Documents/mycode/kuoyi/kuoyi/kuoyi/People/Controller/RewardViewController.m"
-                  timestampString = "559896245.948254"
+                  timestampString = "576684584.705241"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "256"
@@ -183,7 +183,7 @@
                   moduleName = "kuoyi"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zinder/Documents/mycode/kuoyi/kuoyi/kuoyi/People/Controller/RewardViewController.m"
-                  timestampString = "559896245.953083"
+                  timestampString = "576684584.715729"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "255"
@@ -191,22 +191,6 @@
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "kuoyi/People/Controller/StroyWebViewController.m"
-            timestampString = "557848999.621453"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-p_initUI"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -260,48 +244,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "kuoyi/Mine/Controller/UserMarkViewController.m"
-            timestampString = "559668018.810572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
-            landmarkName = "-scrollViewDidEndDecelerating:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "kuoyi/Mine/Controller/LoginViewController.m"
-            timestampString = "559666012.442336"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "611"
-            endingLineNumber = "611"
-            landmarkName = "-loginReq"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kuoyi/Network/KYNetService.m"
-            timestampString = "559798608.358772"
+            timestampString = "559921186.53943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "+postDataWithUrl:param:success:fail:"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "+GetHttpDataWithUrlStr:Dic:SuccessBlock:FailureBlock:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kuoyi/Mine/Controller/UserInfoViewController.m"
+            timestampString = "563723922.507666"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kuoyi/Mine/Controller/StoryCollectViewController.m"
+            timestampString = "563288154.5094759"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "-getStoryListRequest"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kuoyi/Home/Controller/HotPeopleViewController.m"
+            timestampString = "576684584.085121"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-getHotListRequest"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

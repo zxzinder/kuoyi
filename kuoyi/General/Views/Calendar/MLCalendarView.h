@@ -16,7 +16,7 @@
 
 @property (nonatomic,assign)NSInteger maxTotal;//最多可选天数，只有当multiSelect==YES时有效 默认66天
 
-- (void)constructionUI;//开始布局
+- (void)constructionUI:(NSArray *)cantSelectDateArray;//开始布局
 
 /*
  *取消回调

@@ -27,6 +27,8 @@
 #import "LoginViewController.h"
 #import "MineVCTransform.h"
 #import "UserMarkViewController.h"
+#import "NotificationMacro.h"
+#import "HotPeopleViewController.h"
 
 
 #define cellHeight DEVICE_HEIGHT - statusBarAndNavigationBarHeight
@@ -86,7 +88,9 @@ static NSString *ThuCELLID = @"thuCell";
 @end
 
 @implementation HomeViewController
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kHomePageLoad object:nil];;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
@@ -96,19 +100,21 @@ static NSString *ThuCELLID = @"thuCell";
 //    for (int i = 0; i < 32; i++) {
 //        [self.dataArray addObject:[NSString stringWithFormat:@"%d",i]];
 //    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_loadData) name:kHomePageLoad object:nil];
     [self p_initUI];
     [self addNavigationTitleView];
-    [self getHomeDataRequest:nil];
+    [self p_loadData];
     [self getMenuDataRequest];
     [self getADRequest];
-//    NSArray *fontFamilys = [UIFont familyNames];
-//    for (NSString *familyName in fontFamilys) {
-//        NSLog(@"family name : %@",familyName);
-//        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
-//        for (NSString *fontName in fontNames) {
-//            NSLog(@"font name : %@",fontName);
-//        }
-//    }
+    
+    NSArray *fontFamilys = [UIFont familyNames];
+    for (NSString *familyName in fontFamilys) {
+        NSLog(@"family name : %@",familyName);
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
+        for (NSString *fontName in fontNames) {
+            NSLog(@"font name : %@",fontName);
+        }
+    }
     
 }
 -(void)setNaviBtn{
@@ -117,10 +123,16 @@ static NSString *ThuCELLID = @"thuCell";
     //left
     self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.leftBtn.frame = CGRectMake(0, 0, 40, 20);
-    [self.leftBtn setTitle:@"" forState:UIControlStateNormal];
+    [self.leftBtn setTitle:@"人物" forState:UIControlStateNormal];
+    [self.leftBtn setTitleColor:[UIColor colorWithHexString:@"3c3c3c"] forState:UIControlStateNormal];
+    self.leftBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     self.leftBtn.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBtn];
     self.navigationItem.leftBarButtonItem = leftBarItem;
+    [self.leftBtn bk_addEventHandler:^(id sender) {
+        HotPeopleViewController *vc = [[HotPeopleViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    } forControlEvents:UIControlEventTouchUpInside];
 
     self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightBtn.frame = CGRectMake(0, 0, 40, 44);
@@ -205,7 +217,11 @@ static NSString *ThuCELLID = @"thuCell";
     self.navigationItem.titleView = titleView;
     
 }
-
+-(void)p_loadData{
+    
+     [self getHomeDataRequest:nil];
+    
+}
 /**
  生成界面
  */
@@ -300,7 +316,7 @@ static NSString *ThuCELLID = @"thuCell";
         }
         
         weakSelf.isSelectMenu = NO;
-        
+        [weakSelf clearLikeOrDisLikeBtn];
     } forControlEvents:UIControlEventTouchUpInside];
     //生成类型btn
   
@@ -462,8 +478,22 @@ static NSString *ThuCELLID = @"thuCell";
         
         weakSelf.disLikeBtn.backgroundColor = [UIColor whiteColor];
         weakSelf.disLikeBtn.selected = NO;
-        UserMarkViewController *vc = [[UserMarkViewController alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+        weakSelf.isSelectMenu = YES;
+        if ([CustomerManager sharedInstance].isLogin) {
+            if ([[CustomerManager sharedInstance].customer.lable_ids isEqualToString:@""]) {
+                UserMarkViewController *vc = [[UserMarkViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }else{
+                weakSelf.isSelectMenu = YES;
+                [self getHomeDadaByLabelType:@"1" andLabel:[CustomerManager sharedInstance].customer.lable_ids];
+            }
+        }else{
+            LoginViewController *loginVC = [[LoginViewController alloc] initWithLoginSuccessBlock:^{
+            }];
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:loginVC] animated:YES  completion:nil];
+        }
+       
     } forControlEvents:UIControlEventTouchUpInside];
     //18 13
     self.disLikeBtn = [self createBtnWithColor:@"0000ff" font:15 icon:nil];
@@ -486,6 +516,21 @@ static NSString *ThuCELLID = @"thuCell";
         
         weakSelf.likeBtn.backgroundColor = [UIColor whiteColor];
         weakSelf.likeBtn.selected = NO;
+        
+        if ([CustomerManager sharedInstance].isLogin) {
+            if ([[CustomerManager sharedInstance].customer.lable_ids isEqualToString:@""]) {
+                UserMarkViewController *vc = [[UserMarkViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }else{
+                weakSelf.isSelectMenu = YES;
+                [weakSelf getHomeDadaByLabelType:@"2" andLabel:[CustomerManager sharedInstance].customer.lable_ids];
+            }
+        }else{
+            LoginViewController *loginVC = [[LoginViewController alloc] initWithLoginSuccessBlock:^{
+            }];
+            [weakSelf presentViewController:[[UINavigationController alloc] initWithRootViewController:loginVC] animated:YES  completion:nil];
+        }
+        
     } forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -499,6 +544,15 @@ static NSString *ThuCELLID = @"thuCell";
         btn.transform = CGAffineTransformMakeScale(1, 1);
     }
     self.setTypeButton = btn;
+}
+-(void)clearLikeOrDisLikeBtn{
+    
+    self.disLikeBtn.backgroundColor = [UIColor whiteColor];
+    self.disLikeBtn.selected = NO;
+    
+    self.likeBtn.backgroundColor = [UIColor whiteColor];
+    self.likeBtn.selected = NO;
+    
 }
 #pragma mark Request
 -(void)getHomeDataRequest:(NSString *)classid{
@@ -525,6 +579,35 @@ static NSString *ThuCELLID = @"thuCell";
                weakSelf.pageLabel.attributedText = [self pageTextAttribute:@"0"];
         }
      
+    } fail:^(NSDictionary *dict) {
+        [HLYHUD hideAllHUDsForView:nil];
+        [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
+    }];
+    
+}
+-(void)getHomeDadaByLabelType:(NSString *)type andLabel:(NSString *)userLabel{
+    
+    __weak __typeof(self)weakSelf = self;
+    [HLYHUD showLoadingHudAddToView:nil];
+    NSString *url = @"v1.People";
+    NSDictionary *params;
+    //type: 1是同路  2是陌路
+    params = @{@"type":type,@"labile":userLabel ,@"pagesize":@"10",@"ispage":@"false"};//添加
+    
+    [KYNetService postDataWithUrl:url param:params success:^(NSDictionary *dict) {
+        [HLYHUD hideHUDForView:nil];
+        NSLog(@"%@",dict);
+        weakSelf.homeInfo = [HomeInfo yy_modelWithJSON:dict];
+        weakSelf.dataArray = [weakSelf.homeInfo.list mutableCopy];
+        weakSelf.totlaPageLabel.attributedText = [weakSelf totalPageTextAttribute:[NSString stringWithFormat:@"%lu",(unsigned long)weakSelf.dataArray.count]];
+        [weakSelf.homeCollectionView reloadData];
+        [weakSelf.homeCollectionView setContentOffset:CGPointMake(0,0) animated:NO];
+        if (weakSelf.dataArray.count > 0) {
+            weakSelf.pageLabel.attributedText = [self pageTextAttribute:@"1"];
+        }else{
+            weakSelf.pageLabel.attributedText = [self pageTextAttribute:@"0"];
+        }
+        
     } fail:^(NSDictionary *dict) {
         [HLYHUD hideAllHUDsForView:nil];
         [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
@@ -561,7 +644,7 @@ static NSString *ThuCELLID = @"thuCell";
     }];
     
 }
--(void)didCollectRequest:(NSInteger)did{
+-(void)didCollectRequest:(NSInteger)did andIndex:(NSInteger)index{
     __weak __typeof(self)weakSelf = self;
     [HLYHUD showLoadingHudAddToView:nil];
     NSString *url = @"v1.collect/addfavorites";//1 代表人 5 代表故事
@@ -569,9 +652,13 @@ static NSString *ThuCELLID = @"thuCell";
     NSDictionary *params = @{@"object_id":@(did),@"user_uid": uuid ? uuid:@"",@"fav_type":@"1"};
     [KYNetService postDataWithUrl:url param:params success:^(NSDictionary *dict) {
         [HLYHUD hideHUDForView:nil];
-        NSLog(@"%@",dict);
-        [HLYHUD showHUDWithMessage:@"收藏成功！" addToView:nil];
-        
+         NSLog(@"%@",dict);
+        [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
+        HomeDetail *detail = weakSelf.homeInfo.list[index];
+        //detail.is_collection++;
+        detail.is_collection = [dict[@"type"] integerValue];
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
+        [weakSelf.homeCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil]];
     } fail:^(NSDictionary *dict) {
         [HLYHUD hideAllHUDsForView:nil];
         if ([dict[@"error"] integerValue] == 401) {
@@ -671,12 +758,8 @@ static NSString *ThuCELLID = @"thuCell";
     self.isSelectMenu = YES;//!self.isSelectMenu;
     [self setTypeBtn:btn];
     NSInteger typeId = [self.menuList[btn.tag - BUTTON_TAG][@"id"] integerValue];
-   // if (self.isSelectMenu) {
     [self getHomeDataRequest:[NSString stringWithFormat:@"%ld",(long)typeId]];
-    //}else{
-   //     [self getHomeDataRequest:nil];
-   // }
-   
+    [self clearLikeOrDisLikeBtn];
     
 }
 #pragma mark -- 组数
@@ -806,8 +889,7 @@ static NSString *ThuCELLID = @"thuCell";
              [weakSelf shareMyScreen:shareStr];
         };
         cell.collcetClickBack = ^{
-            [weakSelf didCollectRequest:detail.detailID];
-        
+            [weakSelf didCollectRequest:detail.detailID andIndex:indexPath.row];
         };
         cell.praiseClickBack = ^{
           // [weakSelf didPraiseRequest:detail.detailID];

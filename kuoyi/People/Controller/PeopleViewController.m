@@ -33,7 +33,7 @@ static NSString *CELLID = @"peopleCell";
 static NSString *normalCELLID = @"normalCell";
 
 #define ScrollView_TAG 1234
-@interface PeopleViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,PGDatePickerDelegate,CTAlertViewDelegate>
+@interface PeopleViewController ()<UIScrollViewDelegate,PGDatePickerDelegate,CTAlertViewDelegate>
 
 @property (nonatomic, strong) UIButton *rightBtn;
 
@@ -70,7 +70,7 @@ static NSString *normalCELLID = @"normalCell";
     [self addNavigationTitleView];
     [self getPeopleDataRequest];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToCalendar) name:kCalendarPick object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToCalendar:) name:kCalendarPick object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToLogin:) name:kPeopleGoLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToTimePick:) name:kTimePick object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePayCallback:) name:kNotificationPayInfoCallBack object:nil];
@@ -170,6 +170,7 @@ static NSString *normalCELLID = @"normalCell";
     [self.contentScrollView addSubview:self.moveView];
     
     self.contentLabel = [self createLabelWithColor:@"3c3c3c" font:15];
+    //self.contentLabel.font = [UIFont fontWithName:@"JetLink-ThinMing" size:15];
     if (self.peopleInfo.info) {
         NSString *str = self.peopleInfo.info;//@"也许骨子里，即将成为一名父亲的他依然是个守旧的人，但是，他已经用当下最大的努力为未来创造最大程度的自由";
         self.contentLabel.attributedText= [self changeLabelStyle:str];
@@ -267,12 +268,14 @@ static NSString *normalCELLID = @"normalCell";
     [KYNetService postDataWithUrl:url param:params success:^(NSDictionary *dict) {
         [HLYHUD hideHUDForView:nil];
         NSLog(@"%@",dict);
+         [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
         if (type == 1) {
-            [weakSelf.peopleView updateCollectCount];
+            [weakSelf.peopleView updateCollectCount:[dict[@"type"] integerValue]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHomePageLoad object:nil];
         }else if (type == 5){
-            
+            [weakSelf.conView configureCollectionImageSelect:[dict[@"type"] integerValue]];
         }
-        [HLYHUD showHUDWithMessage:@"收藏成功！" addToView:nil];
+       
         
     } fail:^(NSDictionary *dict) {
         [HLYHUD hideAllHUDsForView:nil];
@@ -329,7 +332,7 @@ static NSString *normalCELLID = @"normalCell";
 //        [HLYHUD hideHUDForView:nil];
 //        [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
 //    }];
-    [KYNetService getDataWithUrl:url param:params success:^(NSDictionary *dict) {
+    [KYNetService postDataWithUrl:url param:params success:^(NSDictionary *dict) {
         [HLYHUD hideHUDForView:nil];
         NSLog(@"%@",dict);
         weakSelf.peopleInfo = [PeopleInfo yy_modelWithJSON:dict[@"data"]];
@@ -342,9 +345,10 @@ static NSString *normalCELLID = @"normalCell";
     }];
     
 }
--(void)goToCalendar{
+-(void)goToCalendar:(NSNotification *) userinfo{
     //@{@"name":self.nameTextfield.text, @"password":self.passWord}
     CalendarPickViewController *vc = [[CalendarPickViewController alloc] init];
+    vc.cantSelectDateArray = userinfo.object[@"facilities"];
     vc.selectCallback = ^(NSString *date) {
         NSLog(@"%@",date);
         [[NSNotificationCenter defaultCenter] postNotificationName:kCalendarGetDate object:@{@"date":date}];
@@ -354,7 +358,21 @@ static NSString *normalCELLID = @"normalCell";
   //  [self.navigationController pushViewController:vc animated:YES];
     
 }
-
+//-(void)getCalendarRequest{
+//    
+//    __weak __typeof(self)weakSelf = self;
+//    [HLYHUD showLoadingHudAddToView:nil];
+//    NSString *url = @"v1.share/addShare";
+//    NSDictionary *params = @{};
+//    [KYNetService postDataWithUrl:url param:params success:^(NSDictionary *dict) {
+//        [HLYHUD hideHUDForView:nil];
+//        NSLog(@"%@",dict);
+//    } fail:^(NSDictionary *dict) {
+//        [HLYHUD hideAllHUDsForView:nil];
+//        [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
+//    }];
+//
+//}
 -(void)goToLogin:(NSNotification *) userinfo{
     BuyType type = [userinfo.object[@"type"] integerValue];
     
@@ -420,7 +438,7 @@ static NSString *normalCELLID = @"normalCell";
     
     paraStyle.tailIndent=0;
     
-    NSDictionary *dic =@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@1.0f};
+    NSDictionary *dic =@{NSFontAttributeName:[UIFont fontWithName:@"MingLiU" size:15],NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@1.0f};
     
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:str attributes:dic];
     return attributeStr;

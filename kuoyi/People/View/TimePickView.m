@@ -39,7 +39,7 @@
     
     self.calendarView.maxTotal = 1;
     
-    [self.calendarView constructionUI];
+    [self.calendarView constructionUI:@[]];
     
     __weak typeof(self) weakSelf = self;
     

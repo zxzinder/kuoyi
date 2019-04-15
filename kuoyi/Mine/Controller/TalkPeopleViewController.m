@@ -65,7 +65,7 @@ static NSString * CELLID = @"talkCell";
     self.talkTableView.backgroundColor = [UIColor colorWithHexString:@"e0e8eb"];//eeeeee
     self.talkTableView.estimatedRowHeight = 0;
     self.talkTableView.estimatedSectionFooterHeight = 0;
-    self.talkTableView.estimatedSectionHeaderHeight = 0;
+    //self.talkTableView.estimatedSectionHeaderHeight = 0;
 
     [self.view addSubview:self.talkTableView];
     [self.talkTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,6 +80,7 @@ static NSString * CELLID = @"talkCell";
     __weak __typeof(self)weakSelf = self;
     [HLYHUD showLoadingHudAddToView:nil];
     NSString *url = @"v1.collect/getfavorites";
+    //Customer *model = [CustomerManager sharedInstance].customer;
     NSDictionary *params = @{@"user_uid":[CustomerManager sharedInstance].customer.uuid,@"fav_type":@(PeopleCollection)};
     [KYNetService GetHttpDataWithUrlStr:url Dic:params SuccessBlock:^(NSDictionary *dict) {
         [HLYHUD hideAllHUDsForView:nil];

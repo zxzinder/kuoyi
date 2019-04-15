@@ -58,7 +58,7 @@
         //UIImage *image = [UIImage imageWithColor:[UIColor randomRGBColor] Rect:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];//[UIImage imageNamed:imgName];
         //UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
         UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:self.dataArray[i][@"imgurl"]] placeholderImage:[UIImage imageWithColor:[UIColor randomRGBColor]]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.dataArray[i][@"imgurl"]] placeholderImage:[UIImage imageWithColor:[UIColor whiteColor]]];
         CGRect frame = CGRectZero;
         frame.origin.x = i * pageScrollView.frame.size.width;
         frame.size = pageScrollView.frame.size;

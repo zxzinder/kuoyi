@@ -283,7 +283,7 @@ static NSString * CELLID = @"payCell";
             NSNumber *resultStatus = resultDic[@"resultStatus"];
             if ([resultStatus integerValue] == 9000) {
                 CTAlertView *alerView = [[CTAlertView alloc] initWithTitle:@"" Details:@"支付成功!" OkButton:@"确认"];
-                [alerView show:self.view];
+                [alerView show:nil];
             }else{
                 [HLYHUD showHUDWithMessage:resultDic[@"memo"] addToView:nil];
             }
@@ -297,7 +297,7 @@ static NSString * CELLID = @"payCell";
     if ([resultStatus integerValue] == 9000) {
         CTAlertView *alerView = [[CTAlertView alloc] initWithTitle:@"" Details:@"支付成功!" OkButton:@"确认"];
         alerView.delegate = self;
-        [alerView show:self.view];
+        [alerView show:nil];
     }else{
         [HLYHUD showHUDWithMessage:resultDic[@"memo"] addToView:nil];
         [self pushToOrderView];
@@ -461,6 +461,7 @@ static NSString * CELLID = @"payCell";
         telTF.placeholder = indexPath.row == 0 ? @"您可在此写下备注，不超过350个字" : @"输入代金券号码";
         telTF.textColor = [UIColor colorWithHexString:@"585757"];
         telTF.delegate = self;
+        telTF.returnKeyType = UIReturnKeyDone;
         telTF.textAlignment = NSTextAlignmentLeft;
         telTF.tag = TF_TAG + indexPath.row;
         [cell.contentView addSubview:telTF];
@@ -610,7 +611,14 @@ static NSString * CELLID = @"payCell";
     return priceAttribute;
     
 }
-
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [self.view endEditing:YES];
+    //[textField resignFirstResponder];//取消第一响应者
+    return YES;
+    
+}
 
 #pragma mark setter
 -(UILabel *)createLabelWithColor:(NSString *)color font:(CGFloat)font{

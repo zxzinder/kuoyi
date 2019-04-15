@@ -333,13 +333,13 @@
     [self addSubview:self.collectImgView];
     self.collectImgView.userInteractionEnabled  = YES;
     [self.collectImgView bk_whenTapped:^{
-        if (self.info.is_collection > 0) {
-            [HLYHUD showHUDWithMessage:@"已收藏" addToView:nil];
-        }else{
+//        if (self.info.is_collection > 0) {
+//            [HLYHUD showHUDWithMessage:@"已收藏" addToView:nil];
+//        }else{
             if (weakSelf.collectCallBack) {
                 weakSelf.collectCallBack();
             }
-        }
+//        }
        
     }];
     [self.collectImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -393,7 +393,7 @@
     CGFloat titleHeight = [NSString caculateHeight:titleStr font:titleFont size:CGSizeMake(DEVICE_WIDTH - 28, 50)];
     self.titleLabel = [self createLabelWithColor:@"3c3c3c" font:titleFont];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    //self.titleLabel.font = [UIFont fontWithName:@"SourceHanSerifCN-ExtraLight" size:titleFont];
+    self.titleLabel.font = [UIFont fontWithName:@"STZhongsong" size:titleFont];
     self.titleLabel.text = self.info.gushi_title;
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -435,11 +435,19 @@
     
 }
 
--(void)updateCollectCount{
-    self.collectCount++;
-    self.info.is_collection++;
-    self.collectLabel.text = [NSString stringWithFormat:@"%ld",(long)self.collectCount];
-    self.collectImgView.image = [UIImage imageNamed:@"pplike_select"];
+-(void)updateCollectCount:(NSInteger)type{
+    if (type == 0) {//取消收藏
+        self.collectCount--;
+        self.info.is_collection--;
+        self.collectLabel.text = [NSString stringWithFormat:@"%ld",(long)self.collectCount];
+        self.collectImgView.image = [UIImage imageNamed:@"pplike"];
+    }else{
+        self.collectCount++;
+        self.info.is_collection++;
+        self.collectLabel.text = [NSString stringWithFormat:@"%ld",(long)self.collectCount];
+        self.collectImgView.image = [UIImage imageNamed:@"pplike_select"];
+    }
+   
 }
 -(void)updateFabulousCount{
     
@@ -524,11 +532,11 @@
         descriptor.params[@"direction"] = @(BarrageWalkDirectionR2L);
         descriptor.params[@"trackNumber"] = @3;
         descriptor.params[@"text"] = self.dmArray[i][@"info"]; //字体大小10 BarrageWalkDirectionR2L
-        if (i == 0) {
-            descriptor.params[@"textColor"] = [UIColor clearColor];
-        }else{
+//        if (i == 0) {
+//            descriptor.params[@"textColor"] = [UIColor clearColor];
+//        }else{
            descriptor.params[@"textColor"] = [UIColor colorWithHexString:self.dmColorArray[arc4random() % 4]];
-        }
+//        }
         descriptor.params[@"shadowColor"] = [UIColor darkGrayColor];
         descriptor.params[@"speed"] = @(60);//@(0.5 * 12 + 100);
         descriptor.params[@"delay"] = @(i*0.5+1);

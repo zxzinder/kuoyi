@@ -17,6 +17,9 @@
 #import "HLYHUD.h"
 #import "UserMarkCollectionViewCell.h"
 #import "HomeViewController.h"
+#import "CustomerManager.h"
+
+
 
 static NSString *CELLID = @"markCell";
 @interface UserMarkViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
@@ -47,7 +50,7 @@ static NSString *CELLID = @"markCell";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"28b1bb"];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"2fb9c3"];
     self.title = @"选择标签";
     self.pageIndex = 0;
 //    for (int i = 0; i < 13; i++) {
@@ -63,10 +66,10 @@ static NSString *CELLID = @"markCell";
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     self.markCollectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-    self.markCollectionView.backgroundColor = [UIColor whiteColor];
+    self.markCollectionView.backgroundColor = [UIColor colorWithHexString:@"e0e8eb"];
     self.markCollectionView.showsHorizontalScrollIndicator = NO;
     self.markCollectionView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.markCollectionView.layer.borderWidth = 3;
+    self.markCollectionView.layer.borderWidth = 5;
     self.markCollectionView.pagingEnabled = YES;
     self.markCollectionView.delegate = self;
     self.markCollectionView.dataSource =self;
@@ -96,17 +99,19 @@ static NSString *CELLID = @"markCell";
         make.left.equalTo(self.markCollectionView.mas_left);
     }];
     
-    self.botFirLabel = [self createLabelWithColor:@"000000" font:12];
+    self.botFirLabel = [self createLabelWithColor:@"004a4f" font:12];
     self.botFirLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.botFirLabel.text = @"如果想更改标签可以到\n个人页面里修改";
+    self.botFirLabel.numberOfLines = 2;
     [self.view addSubview:self.botFirLabel];
     [self.botFirLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.markCollectionView.mas_bottom).offset(10);
         make.left.equalTo(self.markCollectionView.mas_left);
     }];
     
-    self.botBtn = [self createBtnWithColor:@"ffffff" font:15];
-    [self.botBtn setTitle:@"完成" forState:UIControlStateNormal];
+    self.botBtn = [self createBtnWithColor:@"ffffff" font:20];
+    self.botBtn.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    [self.botBtn setTitle:@"保 存" forState:UIControlStateNormal];
     self.botBtn.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.botBtn];//167  57
     [self.botBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,11 +121,11 @@ static NSString *CELLID = @"markCell";
     }];
     [self.botBtn bk_addEventHandler:^(id sender) {
         
-        if (weakSelf.dataArray.count / 7 == weakSelf.pageIndex) {
+        if (weakSelf.dataArray.count / 7 == weakSelf.pageIndex || weakSelf.dataArray.count <=7 ) {
             [weakSelf updateUserMarkRequest];
         }else{
             if (weakSelf.dataArray.count / 7 == weakSelf.pageIndex + 1) {
-                [weakSelf.botBtn setTitle:@"完成" forState:UIControlStateNormal];
+                [weakSelf.botBtn setTitle:@"保 存" forState:UIControlStateNormal];
             }
             [weakSelf.markCollectionView setContentOffset:CGPointMake((weakSelf.pageIndex + 1) * weakSelf.markCollectionView.frame.size.width , 0) animated:YES];
             weakSelf.pageIndex++;
@@ -154,7 +159,7 @@ static NSString *CELLID = @"markCell";
         if (weakSelf.dataArray.count > 7) {
             [weakSelf.botBtn setTitle:@"下一页" forState:UIControlStateNormal];
         }else{
-            [weakSelf.botBtn setTitle:@"完成" forState:UIControlStateNormal];
+            [weakSelf.botBtn setTitle:@"保 存" forState:UIControlStateNormal];
         }
         [weakSelf.markCollectionView reloadData];
     } FailureBlock:^(NSDictionary *dict) {
@@ -182,6 +187,8 @@ static NSString *CELLID = @"markCell";
         [KYNetService postDataWithUrl:url param:params success:^(NSDictionary *dict) {
             [HLYHUD hideAllHUDsForView:nil];
             NSLog(@"%@",dict);
+            [CustomerManager sharedInstance].customer.lable_ids = idsStr;
+            [[CustomerManager sharedInstance] updateCustomer];
             [weakSelf popToVC];
         } fail:^(NSDictionary *dict) {
             [HLYHUD hideAllHUDsForView:nil];

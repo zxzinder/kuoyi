@@ -40,6 +40,8 @@
 
 @property (nonatomic,strong)MLCalendarHighlightedModel * moreBeginHighlightedModel;//多选时 开始高亮Model
 
+@property (nonatomic, strong) NSArray *cantSelectDateArray;
+
 @end
 
 @implementation MLCalendarView
@@ -55,11 +57,12 @@
 
 
 
-- (void)constructionUI{
-    
+- (void)constructionUI:(NSArray *)cantSelectDateArray{
+    self.cantSelectDateArray = @[@"2019-3-12",@"2019-3-16",@"2019-4-24"];//[cantSelectDateArray copy];//
      [self buildData];
 }
 - (void)buildData{
+   
     _yearLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100.f, 45.f)];
     _yearLabel.textAlignment = NSTextAlignmentLeft;
     _yearLabel.font = [UIFont boldSystemFontOfSize:18];
@@ -257,7 +260,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    //NSArray *timeArray = @[@"2018-6-12",@"2018-6-16",@"2018-6-24"];
+    //NSArray *timeArray = @[@"2019-3-12",@"2019-3-16",@"2019-3-24"];
     
     MLCalendarCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MLCalendarCollectionViewCell" forIndexPath:indexPath];
 
@@ -273,15 +276,15 @@
         if (day <= 0) {
             day = 1;
         }
-//        for (int i = 0; i < timeArray.count; i++) {
-//            NSString *timeStr = [NSString stringWithFormat:@"%@-%@-%ld",model.year,model.month,(long)day];
-//            NSInteger compResult = [self timeCompareDate:timeArray[i] andEndDate:timeStr];
-//            if (compResult == 0) {
-//                cell.userInteractionEnabled = NO;
-//                [cell setCellNoSelect];
-//                break;
-//            }
-//        }
+        for (int i = 0; i < self.cantSelectDateArray.count; i++) {//
+            NSString *timeStr = [NSString stringWithFormat:@"%@-%@-%ld",model.year,model.month,(long)day];
+            NSInteger compResult = [self timeCompareDate:self.cantSelectDateArray[i][@"date"] andEndDate:timeStr];
+            if (compResult == 0) {
+                cell.userInteractionEnabled = NO;
+                [cell setCellNoSelect];
+                break;
+            }
+        }
 
     }
     
