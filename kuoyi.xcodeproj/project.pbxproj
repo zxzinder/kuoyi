@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		29A023C4B5302EA4843241B3 /* libPods-kuoyi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC06958879496E648E46CCE8 /* libPods-kuoyi.a */; };
 		CF02870C201A1326007BA40B /* HomeThumbnailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF02870B201A1326007BA40B /* HomeThumbnailCollectionViewCell.m */; };
+		CF0744FA22B39CD200D924E8 /* WebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0744F922B39CD200D924E8 /* WebProgressLayer.m */; };
 		CF0D0A8D215B34130088623B /* ChangePhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0D0A8C215B34130088623B /* ChangePhoneViewController.m */; };
 		CF173E1F201F5B8B00B64326 /* SpaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF173E1E201F5B8B00B64326 /* SpaceView.m */; };
 		CF1812012047C34600DBE9C5 /* NormalContent.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1812002047C34600DBE9C5 /* NormalContent.m */; };
@@ -180,6 +181,8 @@
 		AECD9935E87419015127613D /* Pods-kuoyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuoyi.release.xcconfig"; path = "Pods/Target Support Files/Pods-kuoyi/Pods-kuoyi.release.xcconfig"; sourceTree = "<group>"; };
 		CF02870A201A1326007BA40B /* HomeThumbnailCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeThumbnailCollectionViewCell.h; sourceTree = "<group>"; };
 		CF02870B201A1326007BA40B /* HomeThumbnailCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeThumbnailCollectionViewCell.m; sourceTree = "<group>"; };
+		CF0744F822B39CD200D924E8 /* WebProgressLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebProgressLayer.h; sourceTree = "<group>"; };
+		CF0744F922B39CD200D924E8 /* WebProgressLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebProgressLayer.m; sourceTree = "<group>"; };
 		CF0D0A8B215B34130088623B /* ChangePhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePhoneViewController.h; sourceTree = "<group>"; };
 		CF0D0A8C215B34130088623B /* ChangePhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePhoneViewController.m; sourceTree = "<group>"; };
 		CF173E1D201F5B8B00B64326 /* SpaceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpaceView.h; sourceTree = "<group>"; };
@@ -1017,6 +1020,8 @@
 				CFA5A47F20D15EE700E542F7 /* StoryWebView.m */,
 				CF2EE45020DF93B8003AAE89 /* TimePickView.h */,
 				CF2EE45120DF93B8003AAE89 /* TimePickView.m */,
+				CF0744F822B39CD200D924E8 /* WebProgressLayer.h */,
+				CF0744F922B39CD200D924E8 /* WebProgressLayer.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1536,6 +1541,7 @@
 				CFF85F5B201E152B001E00F2 /* WXSTransitionManager+FlipAnimation.m in Sources */,
 				CFF85F5E201E152B001E00F2 /* WXSTransitionManager+PageAnimation.m in Sources */,
 				CFDC562620162F630043216C /* DataManager.m in Sources */,
+				CF0744FA22B39CD200D924E8 /* WebProgressLayer.m in Sources */,
 				F80E9A3320BD791400B3137C /* SpaceWebView.m in Sources */,
 				CF9C0242207B3DF0009CDEBC /* WriteAddressViewController.m in Sources */,
 				CFBED5C0202B3DA100D67405 /* LNAddressSelectView.m in Sources */,
@@ -1732,7 +1738,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E5XJK9M5YD;
+				DEVELOPMENT_TEAM = UF7CTXWJL7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1766,7 +1772,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kuoyilife;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuoyilife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1779,7 +1785,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E5XJK9M5YD;
+				DEVELOPMENT_TEAM = UF7CTXWJL7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1813,7 +1819,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kuoyilife;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuoyilife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

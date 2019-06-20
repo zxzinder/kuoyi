@@ -107,14 +107,14 @@ static NSString *ThuCELLID = @"thuCell";
     [self getMenuDataRequest];
     [self getADRequest];
     
-    NSArray *fontFamilys = [UIFont familyNames];
-    for (NSString *familyName in fontFamilys) {
-        NSLog(@"family name : %@",familyName);
-        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
-        for (NSString *fontName in fontNames) {
-            NSLog(@"font name : %@",fontName);
-        }
-    }
+//    NSArray *fontFamilys = [UIFont familyNames];
+//    for (NSString *familyName in fontFamilys) {
+//        NSLog(@"family name : %@",familyName);
+//        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
+//        for (NSString *fontName in fontNames) {
+//            NSLog(@"font name : %@",fontName);
+//        }
+//    }
     
 }
 -(void)setNaviBtn{

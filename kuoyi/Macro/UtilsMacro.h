@@ -71,7 +71,14 @@ __LINE__, \
 //5.5寸屏
 #define is55InchScreen CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(414, 736))
 //iphoneX
-#define isiPhoneXScreen ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+//#define isiPhoneXScreen ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+//iPhoneX / iPhoneXS
+#define  isIphoneX_XS     (DEVICE_WIDTH == 375.f && DEVICE_HEIGHT == 812.f ? YES : NO)
+//iPhoneXR / iPhoneXSMax
+#define  isIphoneXR_XSMax    (DEVICE_WIDTH == 414.f && DEVICE_HEIGHT == 896.f ? YES : NO)
+//异性全面屏
+#define   isiPhoneXScreen    (isIphoneX_XS || isIphoneXR_XSMax)
+
 //根控制器
 #define WindowView      [[UIApplication sharedApplication] keyWindow]
 //

@@ -77,7 +77,7 @@ static NSString *cellID = @"hotPeople";
     [self.view addSubview:self.leftBtn];
     [self.leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(15);
-        make.top.equalTo(self.view.mas_top).offset(20);
+        make.top.equalTo(self.view.mas_top).offset(statusBarHeight);
     }];
     [self.leftBtn bk_addEventHandler:^(id sender) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -89,12 +89,15 @@ static NSString *cellID = @"hotPeople";
     __weak __typeof(self)weakSelf = self;
     NSString *url = @"v1.people/hot";
     NSDictionary *params = @{};
+    [HLYHUD showLoadingHudAddToView:nil];
     [KYNetService GetHttpDataWithUrlStr:url Dic:params SuccessBlock:^(NSDictionary *dict) {
+        [HLYHUD hideAllHUDsForView:nil];
         NSLog(@"%@",dict);
         self.dataArray = dict[@"fav_list"][@"data"];
         [self.hotTableView reloadData];
     } FailureBlock:^(NSDictionary *dict) {
-        [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:nil];
+         [HLYHUD hideAllHUDsForView:nil];
+        [HLYHUD showHUDWithMessage:dict[@"msg"] addToView:self.view];
     }];
     
 }

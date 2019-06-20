@@ -153,7 +153,7 @@
                   moduleName = "kuoyi"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zinder/Documents/mycode/kuoyi/kuoyi/kuoyi/People/Controller/RewardViewController.m"
-                  timestampString = "576684584.699852"
+                  timestampString = "582706155.5884"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "255"
@@ -168,27 +168,12 @@
                   moduleName = "kuoyi"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zinder/Documents/mycode/kuoyi/kuoyi/kuoyi/People/Controller/RewardViewController.m"
-                  timestampString = "576684584.705241"
+                  timestampString = "582706155.590479"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "256"
                   endingLineNumber = "256"
                   offsetFromSymbolStart = "51">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.322"
-                  moduleName = "kuoyi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zinder/Documents/mycode/kuoyi/kuoyi/kuoyi/People/Controller/RewardViewController.m"
-                  timestampString = "576684584.715729"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "255"
-                  endingLineNumber = "255"
-                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -247,22 +232,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "kuoyi/Network/KYNetService.m"
-            timestampString = "559921186.53943"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "+GetHttpDataWithUrlStr:Dic:SuccessBlock:FailureBlock:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "kuoyi/Mine/Controller/UserInfoViewController.m"
             timestampString = "563723922.507666"
             startingColumnNumber = "9223372036854775807"
@@ -286,22 +255,6 @@
             startingLineNumber = "80"
             endingLineNumber = "80"
             landmarkName = "-getStoryListRequest"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "kuoyi/Home/Controller/HotPeopleViewController.m"
-            timestampString = "576684584.085121"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-getHotListRequest"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

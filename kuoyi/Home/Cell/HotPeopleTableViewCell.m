@@ -76,7 +76,7 @@
 //        make.size.height.mas_equalTo(10);
 //    }];
 //
-    
+
 }
 -(void)configeCellData:(NSString *)urlString{
     
@@ -85,6 +85,23 @@
     [self.hotPeopleWebView loadRequest:request];
     [UIWebView cancelScrollIndicator:self.hotPeopleWebView];
 
+    
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+   
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
     
 }
 @end

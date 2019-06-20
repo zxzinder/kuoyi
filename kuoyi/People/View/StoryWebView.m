@@ -15,11 +15,13 @@
 #import "ReturnUrlTool.h"
 #import "UIWebView+CancelIndicator.h"
 #import <math.h>
+#import <WebKit/WebKit.h>
+
 
 #define titleBtnWidth 50
 #define titleHeight 54
 #define TAG_BTN 10000
-@interface StoryWebView()<UIWebViewDelegate,UIScrollViewDelegate>
+@interface StoryWebView()<UIWebViewDelegate,UIScrollViewDelegate,WKNavigationDelegate,WKUIDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIView *rightView;
@@ -43,6 +45,7 @@
 @property (nonatomic, assign) CGFloat frameHeight;
 
 @property (nonatomic, assign) NSInteger pageIndex;
+
 
 @end
 
@@ -288,23 +291,34 @@
 //        backView.backgroundColor = [UIColor randomRGBColor];
 //        [self.contentScrollView addSubview:backView];
 //
-        UIWebView *webView = [[UIWebView alloc] init];
-        webView.frame = CGRectMake(viewX, viewY, viewW, viewH);
-        webView.delegate = self;
-        webView.scalesPageToFit = YES;
-        webView.backgroundColor = [UIColor whiteColor];
-        [self.contentScrollView addSubview:webView];
-        //ApiBaseUrl @"http://www.kuoyilife.com/index2.php/h5/people/gushiInfo.html?id=29";
-
         NSString *urlStr = [ReturnUrlTool getUrlByWebType:kWebProtocolTypeStory andDetailId:[self.idsList[i][@"id"] integerValue]];
-        
+
         NSURL *url= [[NSURL alloc] initWithString:urlStr];
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+
+        WKWebView *wkWebView = [[WKWebView alloc] init];
+        wkWebView.frame = CGRectMake(viewX, viewY, viewW, viewH);
+        wkWebView.navigationDelegate = self;
+        wkWebView.UIDelegate = self;
+       // [wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+        [self.contentScrollView addSubview:wkWebView];
+        [wkWebView loadRequest:request];
         
-        [webView loadRequest:request];
-        [UIWebView cancelScrollIndicator:webView];
+//        UIWebView *webView = [[UIWebView alloc] init];
+//        webView.frame = CGRectMake(viewX, viewY, viewW, viewH);
+//        webView.delegate = self;
+//        webView.scalesPageToFit = YES;
+//        webView.backgroundColor = [UIColor whiteColor];
+//        [self.contentScrollView addSubview:webView];
+//        //ApiBaseUrl @"http://www.kuoyilife.com/index2.php/h5/people/gushiInfo.html?id=29";
+//
+
+//        [webView loadRequest:request];
+//        [UIWebView cancelScrollIndicator:webView];
+        
+       
     }
-    
+   
 }
 
 
@@ -372,13 +386,17 @@
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+   
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
+    
 }
 #pragma mark setter
 -(UILabel *)createLabelWithColor:(NSString *)color font:(CGFloat)font{

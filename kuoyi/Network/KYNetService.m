@@ -59,6 +59,10 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
    // [manager.requestSerializer setValue: @"application/json;" forHTTPHeaderField:@"Content-Type"];
 
+    NSLog(@"***************Params****************");
+    NSLog(@"地址：%@\n 参数：%@",url, dic);
+    NSLog(@"***************Params****************");
+    
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",ApiBaseUrl,url];
     [manager GET:urlStr parameters:dic progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -74,7 +78,9 @@
         if ([data[@"error"] integerValue] == 0) {
             successBlock(data);
         }else{
+            NSLog(@"***************Error****************");
             NSLog(@"%@:失败  %@",url, data[@"msg"]);
+            NSLog(@"***************Error****************");
             failureBlock(data);
         }
         
