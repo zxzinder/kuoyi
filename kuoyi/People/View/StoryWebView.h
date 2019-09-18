@@ -13,7 +13,7 @@
 -(instancetype)initWithData:(NSInteger)pid;
 -(instancetype)initWithIdList:(NSArray *)idsList andFrameHeight:(CGFloat)frameHeight;
 
-@property (nonatomic, copy) void (^rewardCallback)(NSString *uuid);
+@property (nonatomic, copy) void (^rewardCallback)(NSString *uuid, NSString *rewardimgStr);
 @property (nonatomic, copy) void (^getWebDataCallback)(NSDictionary *webDic,BOOL isShare);
 
 -(void)configureCollectionImageSelect:(NSInteger)type;

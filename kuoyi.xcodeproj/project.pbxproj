@@ -60,6 +60,7 @@
 		CF9C023C207B3373009CDEBC /* ManageAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9C023B207B3373009CDEBC /* ManageAddressTableViewCell.m */; };
 		CF9C023F207B3388009CDEBC /* ManageAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9C023E207B3388009CDEBC /* ManageAddressViewController.m */; };
 		CF9C0242207B3DF0009CDEBC /* WriteAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9C0241207B3DF0009CDEBC /* WriteAddressViewController.m */; };
+		CF9ED0672332082B006D53A2 /* ShareTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9ED0662332082B006D53A2 /* ShareTextView.m */; };
 		CF9EE1CF215F9D9400C07609 /* 华文中宋.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF9EE1CE215F9D9400C07609 /* 华文中宋.ttf */; };
 		CF9EE1D9215FA90A00C07609 /* 超世纪细明体.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF9EE1D7215FA90A00C07609 /* 超世纪细明体.ttf */; };
 		CF9EE1DF215FB0E700C07609 /* MingLiU.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF9EE1DE215FB0E700C07609 /* MingLiU.ttf */; };
@@ -283,6 +284,8 @@
 		CF9C023E207B3388009CDEBC /* ManageAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManageAddressViewController.m; sourceTree = "<group>"; };
 		CF9C0240207B3DF0009CDEBC /* WriteAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WriteAddressViewController.h; sourceTree = "<group>"; };
 		CF9C0241207B3DF0009CDEBC /* WriteAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriteAddressViewController.m; sourceTree = "<group>"; };
+		CF9ED0652332082B006D53A2 /* ShareTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareTextView.h; sourceTree = "<group>"; };
+		CF9ED0662332082B006D53A2 /* ShareTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareTextView.m; sourceTree = "<group>"; };
 		CF9EE1CE215F9D9400C07609 /* 华文中宋.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "华文中宋.ttf"; sourceTree = "<group>"; };
 		CF9EE1D7215FA90A00C07609 /* 超世纪细明体.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "超世纪细明体.ttf"; sourceTree = "<group>"; };
 		CF9EE1DE215FB0E700C07609 /* MingLiU.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MingLiU.ttf; sourceTree = "<group>"; };
@@ -780,6 +783,8 @@
 				CFB636152021F475000BFD3F /* BaseWebView.m */,
 				CF96085F214A3A490024A9F1 /* AdvertisingManage.h */,
 				CF960860214A3A490024A9F1 /* AdvertisingManage.m */,
+				CF9ED0652332082B006D53A2 /* ShareTextView.h */,
+				CF9ED0662332082B006D53A2 /* ShareTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1575,6 +1580,7 @@
 				CFF85F68201E152B001E00F2 /* UINavigationController+WXSTransition.m in Sources */,
 				CFAEF87820302C9600443936 /* NSString+Cryptographic.m in Sources */,
 				CFA1AC2F20C5831700985093 /* UIWebView+CancelIndicator.m in Sources */,
+				CF9ED0672332082B006D53A2 /* ShareTextView.m in Sources */,
 				CF246FE720C6CF2100B83BDB /* Customer.m in Sources */,
 				CFB636192021F5C2000BFD3F /* BaseWebViewController.m in Sources */,
 				CFE4CC3F20205BAF005FA211 /* SettingViewController.m in Sources */,

@@ -14,9 +14,10 @@
 #import "HomeDetail.h"
 #import <BlocksKit+UIKit.h>
 #import "NSString+TPValidator.h"
+#import "ShareTextView.h"
 
 
-@interface HomeCollectionViewCell()<SDCycleScrollViewDelegate,UITextFieldDelegate>
+@interface HomeCollectionViewCell()<SDCycleScrollViewDelegate,UITextFieldDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) UIView *botView;
 
@@ -24,11 +25,12 @@
 
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIView *midBackView;
-@property (nonatomic, strong) UILabel *leftLabel;
-@property (nonatomic, strong) UILabel *rightLabel;
-
-@property (nonatomic, strong) UIView *tfView;
-@property (nonatomic, strong) UILabel *infoLabel;
+@property (nonatomic, strong) ShareTextView *shareTextView;
+//@property (nonatomic, strong) UILabel *leftLabel;
+//@property (nonatomic, strong) UILabel *rightLabel;
+//
+//@property (nonatomic, strong) UIView *tfView;
+//@property (nonatomic, strong) UILabel *infoLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
 
 @property (nonatomic, strong) UIView *btnsView;
@@ -108,7 +110,7 @@
     CGFloat nameFont = 25;
     CGFloat nameTop = 0;
     CGFloat midTop = 2;
-    CGFloat midFont = 15;
+    CGFloat midFont = 14;
     CGFloat backHeight = 45;
     CGFloat comOffset = 12;
     CGFloat segBot = 33;
@@ -117,8 +119,8 @@
         nameFont = 30;
         nameTop = 5;
         midTop = 5;
-        midFont = 18;
-        backHeight = 52;
+        midFont = 17;
+        backHeight = 55;
         comOffset = 15;
         segBot = 37;
     }
@@ -140,6 +142,21 @@
         make.size.height.mas_equalTo(backHeight);
     }];
     
+    self.shareTextView = [[ShareTextView alloc] init];
+    self.shareTextView.delegate = self;
+    self.shareTextView.scrollEnabled = NO;
+    self.shareTextView.textContainerInset = UIEdgeInsetsMake(5, 0, -5, 0);
+    self.shareTextView.backgroundColor = [UIColor colorWithHexString:@"ffec01"];
+    self.shareTextView.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
+    self.shareTextView.textColor = [UIColor colorWithHexString:@"844915"];
+    self.shareTextView.tintColor = [UIColor colorWithHexString:@"844915"];
+    [self.midBackView addSubview:self.shareTextView];
+    [self.shareTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.midBackView.mas_left).offset(20);
+        make.top.equalTo(self.midBackView.mas_top).offset(0);
+        make.right.equalTo(self.midBackView.mas_right).offset(-20);
+        make.bottom.equalTo(self.midBackView.mas_bottom).offset(0);
+    }];
     
     self.botView = [[UIView alloc] init];
     self.botView.backgroundColor = [UIColor colorWithHexString:@"f7f8f8"];
@@ -149,52 +166,52 @@
         make.size.height.mas_equalTo(21);
     }];
     
-    self.leftLabel = [self createLabelWithColor:@"844915" font:midFont];
-    self.leftLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
-    [self.midBackView addSubview:self.leftLabel];
-    [self.leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.midBackView.mas_left).offset(20);
-        make.centerY.equalTo(self.midBackView.mas_centerY).offset(-backHeight/4);
-    }];
-    
-    self.inputTF = [[UITextField alloc] init];
-    self.inputTF.textColor = [UIColor colorWithHexString:@"844915"];
-    self.inputTF.textAlignment = NSTextAlignmentLeft;
-    self.inputTF.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];//[UIFont systemFontOfSize:midFont];
-    self.inputTF.delegate = self;
-    self.inputTF.returnKeyType = UIReturnKeyDone;
-    [self.midBackView addSubview:self.inputTF];
-    [self.inputTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.leftLabel.mas_right).offset(2);
-        make.centerY.equalTo(self.leftLabel.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(100, 15));
-    }];
-    
-    self.tfView = [[UIView alloc] init];
-    self.tfView.backgroundColor = [UIColor colorWithHexString:@"844915"];
-    [self.contentView addSubview:self.tfView];
-    [self.tfView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.inputTF.mas_left);
-        make.bottom.mas_equalTo(self.leftLabel.mas_bottom);
-        //make.top.equalTo(self.nameLabel.mas_bottom).offset(8);
-        make.size.mas_equalTo(CGSizeMake(15, 1));
-    }];
-    
-    self.rightLabel = [self createLabelWithColor:@"844915" font:midFont];
-    self.rightLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
-    [self.midBackView addSubview:self.rightLabel];
-    [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.inputTF.mas_right).offset(2);
-        make.centerY.equalTo(self.leftLabel.mas_centerY);
-    }];
-    
-    self.infoLabel = [self createLabelWithColor:@"844915" font:midFont];
-    self.infoLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
-    [self.midBackView addSubview:self.infoLabel];
-    [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.midBackView.mas_left).offset(20);
-        make.centerY.equalTo(self.midBackView.mas_centerY).offset(backHeight/4);
-    }];
+//    self.leftLabel = [self createLabelWithColor:@"844915" font:midFont];
+//    self.leftLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
+//    [self.midBackView addSubview:self.leftLabel];
+//    [self.leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.midBackView.mas_left).offset(20);
+//        make.centerY.equalTo(self.midBackView.mas_centerY).offset(-backHeight/4);
+//    }];
+//
+//    self.inputTF = [[UITextField alloc] init];
+//    self.inputTF.textColor = [UIColor colorWithHexString:@"844915"];
+//    self.inputTF.textAlignment = NSTextAlignmentLeft;
+//    self.inputTF.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];//[UIFont systemFontOfSize:midFont];
+//    self.inputTF.delegate = self;
+//    self.inputTF.returnKeyType = UIReturnKeyDone;
+//    [self.midBackView addSubview:self.inputTF];
+//    [self.inputTF mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.leftLabel.mas_right).offset(2);
+//        make.centerY.equalTo(self.leftLabel.mas_centerY);
+//        make.size.mas_equalTo(CGSizeMake(100, 15));
+//    }];
+//
+//    self.tfView = [[UIView alloc] init];
+//    self.tfView.backgroundColor = [UIColor colorWithHexString:@"844915"];
+//    [self.contentView addSubview:self.tfView];
+//    [self.tfView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.inputTF.mas_left);
+//        make.bottom.mas_equalTo(self.leftLabel.mas_bottom);
+//        //make.top.equalTo(self.nameLabel.mas_bottom).offset(8);
+//        make.size.mas_equalTo(CGSizeMake(15, 1));
+//    }];
+//
+//    self.rightLabel = [self createLabelWithColor:@"844915" font:midFont];
+//    self.rightLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
+//    [self.midBackView addSubview:self.rightLabel];
+//    [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.inputTF.mas_right).offset(2);
+//        make.centerY.equalTo(self.leftLabel.mas_centerY);
+//    }];
+//
+//    self.infoLabel = [self createLabelWithColor:@"844915" font:midFont];
+//    self.infoLabel.font = [UIFont fontWithName:@"HiraginoSans-W3" size:midFont];
+//    [self.midBackView addSubview:self.infoLabel];
+//    [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.midBackView.mas_left).offset(20);
+//        make.centerY.equalTo(self.midBackView.mas_centerY).offset(backHeight/4);
+//    }];
     NSString *str = @"UID犹如带点个性、梦想、复古、人文风味的面貌，呈现着当下80后其中之一的性格。做着自己喜欢的事情，去实现梦想，哪怕过程再艰辛也是种幸福。";
     CGFloat contentHeight = [NSString caculateHeight:str font:12 size:CGSizeMake(DEVICE_WIDTH * 0.83 - 40, MAXFLOAT)];
     self.contentLabel = [self createLabelWithColor:@"3c3c3c" font:12];
@@ -311,7 +328,7 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
-    self.tfView.hidden = YES;
+    //self.tfView.hidden = YES;
     return YES;
     
 }
@@ -325,6 +342,25 @@
     }
     return YES;
     
+}
+
+#pragma mark UITextViewDelegate
+-(void)textViewDidChange:(UITextView *)textView{
+    
+    //    textview 改变字体的行间距
+//    CGFloat midFont = 14;
+//    if (is55InchScreen || isiPhoneXScreen) {
+//        midFont = 17;
+//    }
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    paragraphStyle.lineSpacing = 2;// 字体的行间距
+//    NSDictionary *attributes = @{
+//                                 NSFontAttributeName:[UIFont fontWithName:@"HiraginoSans-W3" size:midFont],
+//                                 NSParagraphStyleAttributeName:paragraphStyle,
+//                                 NSForegroundColorAttributeName:[UIColor colorWithHexString:@"844915"]
+//                                 };
+//    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
+//
 }
 
 #pragma mark - SDCycleScrollViewDelegate
@@ -357,10 +393,14 @@
     NSString *pageStr = [NSString stringWithFormat:@"1 / %lu",[data.img count]];
     [self.pageBtn setTitle:pageStr forState:UIControlStateNormal];//colorWithHexString:@"adaeba"
     self.nameLabel.text = data.name;
-    self.leftLabel.text = @"我想拥有 {";
-    self.rightLabel.text = @"} 发型";
-    self.infoLabel.text = @"快说出来，告诉我。";
-    self.inputTF.text = @"";
+    NSString *shareStr = data.shareinfo;
+    shareStr = [shareStr stringByReplacingOccurrencesOfString:@"{1}" withString:@"{  }"];
+    shareStr = [shareStr stringByReplacingOccurrencesOfString:@"{N}" withString:@"{  }"];
+    self.shareTextView.text = shareStr;
+//    self.leftLabel.text = @"我想拥有 {";
+//    self.rightLabel.text = @"} 发型";
+//    self.infoLabel.text = @"快说出来，告诉我。";
+//    self.inputTF.text = @"";
     self.commentLabel.text = data.comment;
     self.prasieLabel.text = data.fabulous;
     if (data.is_collection > 0) {

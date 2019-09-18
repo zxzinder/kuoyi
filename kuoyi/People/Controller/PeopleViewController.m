@@ -207,11 +207,11 @@ static NSString *normalCELLID = @"normalCell";
         [weakSelf.peopleView showDetailImgView];
         weakSelf.isShowDetailBtn = YES;
     };
-    self.conView.rewardCallback = ^(NSString *uuid) {
+    self.conView.rewardCallback = ^(NSString *uuid,NSString *rewardimgStr) {
         RewardViewController *vc = [[RewardViewController alloc] init];
         vc.pid = weakSelf.homeDetail.detailID;
         vc.uuid = uuid;
-        vc.imgUrl = weakSelf.homeDetail.rewardimg;
+        vc.imgUrl = rewardimgStr;//weakSelf.homeDetail.rewardimg;
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
     };

@@ -172,7 +172,7 @@
 -(void)hideDetailImgView{
     [UIView animateWithDuration:0.3 animations:^{
         self.detailImgView.alpha = 0;
-        self.infoLabel.alpha = 0;
+        self.infoLabel.alpha = 0;   
     }];
 }
 #pragma mark setter

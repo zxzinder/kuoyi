@@ -105,11 +105,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kuoyi/People/Controller/RewardViewController.m"
-            timestampString = "561133084.652451"
+            timestampString = "583056630.36902"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
             landmarkName = "-handlePayCallback:"
             landmarkType = "7">
          </BreakpointContent>
@@ -121,11 +121,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kuoyi/People/Controller/RewardViewController.m"
-            timestampString = "561133084.652542"
+            timestampString = "583056630.369221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "-goToAliPay"
             landmarkType = "7">
          </BreakpointContent>
@@ -137,11 +137,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kuoyi/People/Controller/RewardViewController.m"
-            timestampString = "561133084.652603"
+            timestampString = "583056630.369357"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "-rewardRequest"
             landmarkType = "7">
             <Locations>
@@ -153,11 +153,11 @@
                   moduleName = "kuoyi"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zinder/Documents/mycode/kuoyi/kuoyi/kuoyi/People/Controller/RewardViewController.m"
-                  timestampString = "582706155.5884"
+                  timestampString = "590488236.131394"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "255"
-                  endingLineNumber = "255"
+                  startingLineNumber = "260"
+                  endingLineNumber = "260"
                   offsetFromSymbolStart = "596">
                </Location>
                <Location
@@ -168,11 +168,11 @@
                   moduleName = "kuoyi"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zinder/Documents/mycode/kuoyi/kuoyi/kuoyi/People/Controller/RewardViewController.m"
-                  timestampString = "582706155.590479"
+                  timestampString = "590488236.133209"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "256"
-                  endingLineNumber = "256"
+                  startingLineNumber = "261"
+                  endingLineNumber = "261"
                   offsetFromSymbolStart = "51">
                </Location>
             </Locations>
@@ -245,16 +245,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "kuoyi/Mine/Controller/StoryCollectViewController.m"
-            timestampString = "563288154.5094759"
+            filePath = "kuoyi/Home/Cell/HomeCollectionViewCell.m"
+            timestampString = "590488235.818195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-getStoryListRequest"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
+            landmarkName = "-configeData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

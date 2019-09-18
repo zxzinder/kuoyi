@@ -350,7 +350,7 @@ static NSString *ThuCELLID = @"thuCell";
     self.totlaPageLabel.transform = CGAffineTransformRotate(self.totlaPageLabel.transform, M_PI/2);
     [self.menuView addSubview:self.totlaPageLabel];
     [self.totlaPageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.menuView.mas_bottom).offset(0);
+        make.bottom.equalTo(self.menuView.mas_bottom).offset(-10);
         make.centerX.equalTo(self.menuView.mas_centerX).offset(-11);
         make.size.mas_equalTo(CGSizeMake(100, DEVICE_WIDTH * 0.17 -30 ));
     }];
@@ -359,7 +359,7 @@ static NSString *ThuCELLID = @"thuCell";
     segImgView.image = [UIImage imageNamed:@"线"];
     [self.menuView addSubview:segImgView];
     [segImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.menuView.mas_bottom).offset(-70);
+        make.bottom.equalTo(self.menuView.mas_bottom).offset(-80);
         make.left.equalTo(self.menuView.mas_left).offset(9);
         make.size.mas_equalTo(CGSizeMake(15, 26));
     }];
@@ -373,10 +373,10 @@ static NSString *ThuCELLID = @"thuCell";
     self.pageLabel.transform = CGAffineTransformRotate(self.pageLabel.transform, M_PI/2);
     [self.menuView addSubview:self.pageLabel];
     [self.pageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(segImgView.mas_top).offset(0);
+        make.bottom.equalTo(segImgView.mas_top).offset(-30);
         make.centerX.equalTo(self.menuView.mas_centerX).offset(-5);
         //make.left.equalTo(self.menuView.mas_left).offset(50);
-        make.size.mas_equalTo(CGSizeMake(70, DEVICE_WIDTH * 0.17));
+        make.size.mas_equalTo(CGSizeMake(100, DEVICE_WIDTH * 0.17));
     }];
     
     UIImageView *pulldownImgView = [[UIImageView alloc] init];

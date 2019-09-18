@@ -309,6 +309,11 @@ static NSString *CELLID = @"bookCell";
 }
 -(void)configureCell:(UICollectionViewCell *)cell andIndex:(NSInteger)index{
     //
+    
+    for (UIView *view in [cell.contentView subviews]){
+        [view removeFromSuperview];
+    }
+    
     NSDictionary *data = self.detailList[index];
     UIImageView *imgView = [[UIImageView alloc] init];
     NSURL *url = [NSURL URLWithString:data[@"fengmian"]];

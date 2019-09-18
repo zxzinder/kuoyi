@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSString *comment;
 @property (nonatomic, strong) NSString *fabulous;
 @property (nonatomic, copy) NSString *rewardimg;
+@property (nonatomic, copy) NSString *shareinfo;
 
 @property (nonatomic, assign) BOOL isbook;
 @property (nonatomic, assign) BOOL isspace;

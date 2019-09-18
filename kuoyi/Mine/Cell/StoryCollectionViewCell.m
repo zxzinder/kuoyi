@@ -174,12 +174,12 @@
           [self.storyImgView sd_setImageWithURL:[NSURL URLWithString:data[@"imgurl"]] placeholderImage:[UIImage imageWithColor:[UIColor whiteColor]]];
     }
   
-    self.nameLabel.text = data[@"title"];//@"内心有温柔与坚守";
-    self.descLabel.text = data[@"author"];;//@"文|康康达"
+    self.nameLabel.text = [NSString stringWithFormat:@"%@",data[@"title"]];//@"内心有温柔与坚守";
+    self.descLabel.text = [NSString stringWithFormat:@"%@",data[@"author"]];//@"文|康康达"
     if ([data[@"ftitle"] isKindOfClass:[NSNull class]]) {
         self.titleLabel.text = @"";
     }else{
-        self.titleLabel.text = data[@"ftitle"];
+        self.titleLabel.text = [NSString stringWithFormat:@"%@",data[@"ftitle"]];
     }
     //@"如果按照六十岁的寿命算，他已有一半入土，正是生命短暂平生所愿";
    // self.subTitleLabel.text = data[@"title"];//@"梁博X凸版印刷";

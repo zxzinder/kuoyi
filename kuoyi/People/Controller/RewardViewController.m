@@ -23,6 +23,7 @@
 #import "APRSASigner.h"
 #import "CTAlertView.h"
 #import <UIImageView+WebCache.h>
+#import "UIImage+Generate.h"
 
 
 #define BUTTON_TAG 1000
@@ -80,7 +81,11 @@
 //    }];
     
     UIImageView *imgView = [[UIImageView alloc] init];
-    [imgView sd_setImageWithURL:[NSURL URLWithString:self.imgUrl] placeholderImage:[UIImage imageNamed:@"b2.jpg"]];
+    if (self.imgUrl && ![self.imgUrl isKindOfClass:[NSNull class]]) {
+        [imgView sd_setImageWithURL:[NSURL URLWithString:self.imgUrl] placeholderImage:[UIImage imageWithColor:[UIColor whiteColor]]];
+    }else{
+        imgView.image = [UIImage imageWithColor:[UIColor whiteColor]];
+    }
      [self.view addSubview:imgView];
     [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.view);

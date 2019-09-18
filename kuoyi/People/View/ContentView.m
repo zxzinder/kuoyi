@@ -60,7 +60,7 @@
     
     self = [super init];
     if (self) {
-        self.contentScrollHeght = DEVICE_HEIGHT - 80 - statusBarAndNavigationBarHeight - titleHeight;
+        self.contentScrollHeght = DEVICE_HEIGHT - 80 - statusBarAndNavigationBarHeight - titleHeight - tabbarSafeBottomMargin;
         self.detailData = detail;
         self.info = info;
         [self setBotContent];
@@ -147,9 +147,9 @@
     [self.storyWebView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.midView);
     }];
-    self.storyWebView.rewardCallback = ^(NSString *uuid) {
+    self.storyWebView.rewardCallback = ^(NSString *uuid, NSString *rewardimgStr) {
         if (weakSelf.rewardCallback) {
-            weakSelf.rewardCallback(uuid);
+            weakSelf.rewardCallback(uuid,rewardimgStr);
         }
     };
     self.storyWebView.getWebDataCallback = ^(NSDictionary *webDic, BOOL isShare) {
@@ -188,7 +188,7 @@
     __weak __typeof(self)weakSelf = self;
     for (int i=0; i < count ; i++) {
         CGFloat viewX = i * viewW;
-        viewH = DEVICE_HEIGHT - 75  - statusBarAndNavigationBarHeight - titleHeight;
+        viewH = DEVICE_HEIGHT - 80  - statusBarAndNavigationBarHeight - titleHeight - tabbarSafeBottomMargin;
         //UIView *conView = [[UIView alloc] initWithFrame:CGRectMake(viewX, viewY, viewW, viewH)];
         UIView *backView = [[UIView alloc] init];
         backView.frame = CGRectMake(viewX, viewY, viewW, viewH);
@@ -427,7 +427,7 @@
     
     if (_contentScrollView == nil) {
         _contentScrollView = [[UIScrollView alloc]init];
-        _contentScrollView.backgroundColor =  [UIColor colorWithHexString:@"efefef"];
+        _contentScrollView.backgroundColor =  [UIColor redColor];//colorWithHexString:@"efefef"
         _contentScrollView.contentSize = CGSizeMake(_titleArr.count * DEVICE_WIDTH, 0);
         _contentScrollView.pagingEnabled = YES;
         _contentScrollView.showsHorizontalScrollIndicator = NO;

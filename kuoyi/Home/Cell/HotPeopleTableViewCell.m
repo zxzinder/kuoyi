@@ -13,6 +13,7 @@
 #import <BlocksKit+UIKit.h>
 #import "UIWebView+CancelIndicator.h"
 
+
 @interface HotPeopleTableViewCell()<UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *hotPeopleWebView;
@@ -50,11 +51,14 @@
     self.hotPeopleWebView.delegate = self;
     self.hotPeopleWebView.scalesPageToFit = YES;
     self.hotPeopleWebView.backgroundColor = [UIColor whiteColor];
+    self.hotPeopleWebView.scrollView.bounces = NO;
     [self.contentView addSubview:self.hotPeopleWebView];
     [self.hotPeopleWebView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
-    
+    if (@available(iOS 11.0, *)) {
+        self.hotPeopleWebView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     UIButton *clickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     clickBtn.backgroundColor = [UIColor clearColor];
     [clickBtn bk_addEventHandler:^(id sender) {

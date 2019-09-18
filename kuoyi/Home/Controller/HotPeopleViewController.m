@@ -66,18 +66,30 @@ static NSString *cellID = @"hotPeople";
     self.hotTableView.pagingEnabled = YES;
     self.hotTableView.backgroundColor = [UIColor whiteColor];
     self.hotTableView.rowHeight = DEVICE_HEIGHT;
-    [self.hotTableView registerClass:[HotPeopleTableViewCell class] forCellReuseIdentifier:cellID];
+   // [self.hotTableView registerClass:[HotPeopleTableViewCell class] forCellReuseIdentifier:cellID];
     [self.view addSubview:self.hotTableView];
     [self.hotTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    if (@available(iOS 11.0, *)) {
+        self.hotTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     
-    self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.leftBtn setImage:[UIImage imageNamed:@"navgation_back"] forState:UIControlStateNormal];
-    [self.view addSubview:self.leftBtn];
-    [self.leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIImageView *imgView = [[UIImageView alloc] init];
+    imgView.image = [UIImage imageNamed:@"navgation_back"];
+    [self.view addSubview:imgView];
+    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(15);
         make.top.equalTo(self.view.mas_top).offset(statusBarHeight);
+    }];
+    
+    self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.leftBtn.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.leftBtn];
+    [self.leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left);
+        make.top.equalTo(self.view.mas_top).offset(statusBarHeight);
+        make.size.mas_equalTo(CGSizeMake(60, 40));
     }];
     [self.leftBtn bk_addEventHandler:^(id sender) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -112,10 +124,16 @@ static NSString *cellID = @"hotPeople";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     __weak __typeof(self)weakSelf = self;
-    HotPeopleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath] ;
+    NSString *cellStr = [NSString stringWithFormat:@"%@%ld",cellID,(long)indexPath.row];
+    HotPeopleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr] ;
 //    HotPeopleTableViewCell *cell = [[HotPeopleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell configeCellData:self.dataArray[indexPath.row][@"url"]];
+    if (!cell) {
+        cell = [[HotPeopleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
+        // other initialization i.e. add an UIButton to cell's contentView
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell configeCellData:self.dataArray[indexPath.row][@"url"]];
+    }
+   
     cell.webClickCallback = ^{
         PeopleViewController *vc = [[PeopleViewController alloc] init];
         HomeDetail *detail = [HomeDetail yy_modelWithJSON:weakSelf.dataArray[indexPath.row][@"info"]];

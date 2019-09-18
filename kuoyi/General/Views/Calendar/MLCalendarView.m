@@ -58,7 +58,7 @@
 
 
 - (void)constructionUI:(NSArray *)cantSelectDateArray{
-    self.cantSelectDateArray = @[@"2019-3-12",@"2019-3-16",@"2019-4-24"];//[cantSelectDateArray copy];//
+    self.cantSelectDateArray = [cantSelectDateArray copy];//@[@"2019-3-12",@"2019-3-16",@"2019-4-24"];//
      [self buildData];
 }
 - (void)buildData{

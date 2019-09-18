@@ -18,7 +18,7 @@
 
 @property (nonatomic, copy) void (^storyCallback)(void);
 @property (nonatomic, copy) void (^titleBtnCallback)(void);
-@property (nonatomic, copy) void (^rewardCallback)(NSString *uuid);
+@property (nonatomic, copy) void (^rewardCallback)(NSString *uuid,NSString *rewardimgStr);
 @property (nonatomic, copy) void (^getWebDataCallback)(NSDictionary *webDic,BOOL isShare);
 
 -(void)hideMidView;
