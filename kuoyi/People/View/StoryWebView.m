@@ -299,16 +299,16 @@
         wkWebView.tag = TAG_WKWEB + i;
         wkWebView.navigationDelegate = self;
         wkWebView.UIDelegate = self;
-        [wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+        //[wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
        // [wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
         [self.contentScrollView addSubview:wkWebView];
         [wkWebView loadRequest:request];
         
-        UIProgressView *storyProgressView = [[UIProgressView alloc] initWithFrame:CGRectMake(viewX, viewY, viewW, 0)];
-        storyProgressView.tintColor = [UIColor colorWithHexString:@"e6e6e6"];
-        storyProgressView.trackTintColor = [UIColor whiteColor];
-        storyProgressView.tag = TAG_PROCESS + i;
-        [self.contentScrollView addSubview:storyProgressView];
+//        UIProgressView *storyProgressView = [[UIProgressView alloc] initWithFrame:CGRectMake(viewX, viewY, viewW, 0)];
+//        storyProgressView.tintColor = [UIColor colorWithHexString:@"e6e6e6"];
+//        storyProgressView.trackTintColor = [UIColor whiteColor];
+//        storyProgressView.tag = TAG_PROCESS + i;
+//        [self.contentScrollView addSubview:storyProgressView];
 //        UIWebView *webView = [[UIWebView alloc] init];
 //        webView.frame = CGRectMake(viewX, viewY, viewW, viewH);
 //        webView.delegate = self;
@@ -370,29 +370,29 @@
 #pragma mark - event response
 // 计算wkWebView进度条
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    WKWebView *storyWebView = (WKWebView *)[self viewWithTag:TAG_WKWEB + self.pageIndex];
-    UIProgressView *storyProgressView = (UIProgressView *)[self viewWithTag:TAG_PROCESS + self.pageIndex];
-    
-    if (object == storyWebView && [keyPath isEqualToString:@"estimatedProgress"]) {
-        CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
-        NSLog(@"newprogress:*********************%f",newprogress);
-        storyProgressView.alpha = 1.0f;
-        [storyProgressView setProgress:newprogress animated:YES];
-        if (newprogress >= 1.0f) {
-            [UIView animateWithDuration:0.3f
-                                  delay:0.3f
-                                options:UIViewAnimationOptionCurveEaseOut
-                             animations:^{
-                                 storyProgressView.alpha = 0.0f;
-                             }
-                             completion:^(BOOL finished) {
-                                 [storyProgressView setProgress:0 animated:NO];
-                             }];
-        }
-        
-    } else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
+//    WKWebView *storyWebView = (WKWebView *)[self viewWithTag:TAG_WKWEB + self.pageIndex];
+//    UIProgressView *storyProgressView = (UIProgressView *)[self viewWithTag:TAG_PROCESS + self.pageIndex];
+//
+//    if (object == storyWebView && [keyPath isEqualToString:@"estimatedProgress"]) {
+//        CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
+//        NSLog(@"newprogress:*********************%f",newprogress);
+//        storyProgressView.alpha = 1.0f;
+//        [storyProgressView setProgress:newprogress animated:YES];
+//        if (newprogress >= 1.0f) {
+//            [UIView animateWithDuration:0.3f
+//                                  delay:0.3f
+//                                options:UIViewAnimationOptionCurveEaseOut
+//                             animations:^{
+//                                 storyProgressView.alpha = 0.0f;
+//                             }
+//                             completion:^(BOOL finished) {
+//                                 [storyProgressView setProgress:0 animated:NO];
+//                             }];
+//        }
+//
+//    } else {
+//        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+//    }
 }
 
 #pragma mark - UIScrollViewDelegate

@@ -143,6 +143,7 @@
     }];
     
     self.shareTextView = [[ShareTextView alloc] init];
+    self.shareTextView.returnKeyType = UIReturnKeyDone;
     self.shareTextView.delegate = self;
     self.shareTextView.scrollEnabled = NO;
     self.shareTextView.textContainerInset = UIEdgeInsetsMake(5, 0, -5, 0);
@@ -361,6 +362,17 @@
 //                                 };
 //    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
 //
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [self.contentView endEditing:YES];
+        [textView resignFirstResponder];
+        if (self.doneEditCallBack) {
+            self.doneEditCallBack(text);
+        }
+        return NO;//这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    return YES;
 }
 
 #pragma mark - SDCycleScrollViewDelegate

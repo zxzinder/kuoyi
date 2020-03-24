@@ -353,16 +353,18 @@
             self.titleBtnCallback();
         }
     }else{
-        
-        NSUInteger i = btn.tag;
-        [self setTitleBtn:btn andView:self.imgs[i]];
-        CGFloat a = DEVICE_WIDTH;
-        
-        CGFloat x = i * a;
-        
-        [self.contentScrollView setContentOffset:CGPointMake(x, 0) animated:YES];
-        
-        
+        if (self.imgs.count == 1) {//只有一个底部按钮就直接隐藏
+            [self hideMidView];
+        }else{
+            NSUInteger i = btn.tag;
+            [self setTitleBtn:btn andView:self.imgs[i]];
+            CGFloat a = DEVICE_WIDTH;
+            
+            CGFloat x = i * a;
+            
+            [self.contentScrollView setContentOffset:CGPointMake(x, 0) animated:YES];
+        }
+
     }
    
 }

@@ -27,16 +27,16 @@
     NSString *nowStr = [formatter stringFromDate:nowDate];
     
     
-    if ([nowStr isEqualToString:lastTime]) {
-        //RootTabBarController *controller = [[RootTabBarController alloc] init];
-        HomeViewController *controller = [[HomeViewController alloc] init];
-        UINavigationController *rootNVC = [[UINavigationController alloc] initWithRootViewController:controller];
-        window.rootViewController = rootNVC;
-    }else{
+//    if ([nowStr isEqualToString:lastTime]) {
+//        //RootTabBarController *controller = [[RootTabBarController alloc] init];
+//        HomeViewController *controller = [[HomeViewController alloc] init];
+//        UINavigationController *rootNVC = [[UINavigationController alloc] initWithRootViewController:controller];
+//        window.rootViewController = rootNVC;
+//    }else{
         NewFeatureViewController *viewController = [[NewFeatureViewController alloc] init];
         window.rootViewController = viewController;
         //[[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:VersionKey];
         [DataManager saveObject:nowStr forKey:TimeKey];
-    }
+//    }
 }
 @end

@@ -71,6 +71,8 @@ static NSString *CELLID = @"mineCell";
 
 @property (nonatomic, strong) MineVCTransform *mineTransform;
 
+@property (nonatomic, strong) NSDictionary *userData;
+
 
 @end
 
@@ -490,6 +492,7 @@ static NSString *CELLID = @"mineCell";
     NSString *url = @"v1.user/getInfo";
     [KYNetService GetHttpDataWithUrlStr:url Dic:@{} SuccessBlock:^(NSDictionary *dict) {
         NSLog(@"%@",dict);
+        self.userData = dict;
         if (dict[@"data"][@"msg_len"]) {
             NSInteger msgCount = [dict[@"data"][@"msg_len"] integerValue];
             if (msgCount > 0) {
@@ -501,6 +504,7 @@ static NSString *CELLID = @"mineCell";
         [self.praiseBtn setTitle:[NSString stringWithFormat:@"%@\n点赞",dict[@"data"][@"fabulous"]] forState:UIControlStateNormal];
         [self.commentBtn setTitle:[NSString stringWithFormat:@"%@\n评论",dict[@"data"][@"danmu_len"]] forState:UIControlStateNormal];
         [self.shareBtn setTitle:[NSString stringWithFormat:@"%@\n分享",dict[@"data"][@"share"]] forState:UIControlStateNormal];
+        [self.mineTableView reloadData];
     } FailureBlock:^(NSDictionary *dict) {
         
     }];
@@ -639,6 +643,20 @@ static NSString *CELLID = @"mineCell";
         make.size.height.mas_equalTo(1);
     }];
     UILabel *rightLabel = [self createLabelWithColor:@"595757" font:10];
+    
+    if ([self.dataSourceArray[indexPath.section][indexPath.row] isEqualToString:@"购物车"]) {
+        NSString *rightStr = @"0";
+        if (self.userData[@"data"][@"cartNumber"]) {
+            rightStr = [NSString stringWithFormat:@"%@",self.userData[@"data"][@"cartNumber"]];
+        }
+        rightLabel.text = rightStr;
+    }else if ([self.dataSourceArray[indexPath.section][indexPath.row] isEqualToString:@"我的订单"]){
+        NSString *rightStr = @"0";
+        if (self.userData[@"data"][@"orderNumber"]) {
+            rightStr = [NSString stringWithFormat:@"%@",self.userData[@"data"][@"orderNumber"]];
+        }
+        rightLabel.text = rightStr;
+    }
     [cell.contentView addSubview:rightLabel];
     [rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(cell.contentView.mas_centerY);
